@@ -1,4 +1,4 @@
-# 🍎 Apple Developer Academy — Challenges
+# <img src="https://img.icons8.com/?size=100&id=30840&format=png&color=808080" width="20" style="vertical-align:middle;" />  Apple Developer Academy — Challenges
 
 > A collection of SwiftUI challenges completed during the **Apple Developer Academy** program.  
 > Each folder is a self-contained Xcode project that progressively builds iOS development skills.
