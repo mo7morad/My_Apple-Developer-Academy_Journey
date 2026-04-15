@@ -10,7 +10,7 @@
 | # | Folder | App Name | Core Concepts |
 |---|---|---|---|
 | 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | Academy Eats | `NavigationStack`, `List`, `HStack`, `Image`, assets |
-| 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Academy Eats (peer read) | Code reading, SwiftUI layout, peer programming |
+| 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Academy Eats (Sketch design) | Sketch, UI/UX design, asset export, peer feedback |
 | 2 | [`AppleAcademy-Ch2-Contacts`](./AppleAcademy-Ch2-Contacts) | Contacts | `Dictionary(grouping:)`, sectioned `List`, toolbar, search |
 
 ---
@@ -27,9 +27,11 @@ The **first SwiftUI screen**, built from zero. A scrollable restaurant list that
 
 ### [Challenge 1 — Help an Academy Friend](./AppleAcademy-Ch1-HelpAnAcademyFriend)
 
-Same app as Challenge 0, but the challenge flips — **you are handed someone else's code** and must read, understand, and explain it. Mirrors real-world team development where reading code is as important as writing it.
+A **design challenge** built around **Sketch** — the vector design tool used throughout the Academy. Starting from the Academy Eats screen produced in Challenge 0, the task is to recreate and improve that UI inside Sketch: defining artboards, building reusable symbols, applying text styles, and exporting assets for Xcode.
 
-**Key skill:** Cold-reading an Xcode project, tracing view modifiers, and articulating design decisions to a peer.
+The collaborative twist: you share your design with a classmate, gather feedback, and iterate — practising the designer ↔ developer handoff loop that underpins real product teams.
+
+**Key skills:** Sketch artboards & symbols, visual hierarchy, `@1x/@2x/@3x` asset export, peer design critique
 
 ---
 

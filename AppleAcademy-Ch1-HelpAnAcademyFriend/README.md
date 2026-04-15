@@ -1,15 +1,15 @@
 # 🤝 Challenge 1 — Help an Academy Friend
 
 > **Apple Developer Academy** · Challenge 1  
-> *Read someone else's code, understand it, and extend it — a core developer skill.*
+> *Learn Sketch, design a UI, and help a peer bring their idea to life.*
 
 ---
 
 ## 📖 About
 
-**Help an Academy Friend** takes the same **Academy Eats** codebase from Challenge 0 and asks you to step into a peer's shoes. The challenge isn't writing new code from scratch — it's *reading* unfamiliar SwiftUI code, understanding what every line does, and then being able to explain and build on top of it.
+**Help an Academy Friend** is a design challenge centred on **Sketch** — the industry-standard vector design tool used for creating app interfaces. Rather than writing Swift code from scratch, the focus here is on the *design layer*: understanding UI components, crafting layouts, and producing a polished screen prototype that a developer could hand off to Xcode.
 
-This mirrors real-world team development, where you spend as much time reading code as writing it.
+The challenge also carries a collaborative spirit: you use your new Sketch skills to help a classmate visualise or improve *their* app idea, reinforcing the feedback loop between designer and developer.
 
 ---
 
@@ -17,12 +17,12 @@ This mirrors real-world team development, where you spend as much time reading c
 
 | Concept | What you practice |
 |---|---|
-| Code reading | Navigating an unfamiliar Xcode project confidently |
-| `NavigationStack` | Understanding navigation container behavior |
-| `List` + `HStack` | Decomposing row-based layouts |
-| `Image` (asset catalog) | Tracing where assets come from and how they're displayed |
-| Pair / peer programming | Explaining code choices out loud to a partner |
-| SwiftUI preview | Using `#Preview` to rapidly inspect UI without running the full app |
+| Sketch fundamentals | Artboards, shapes, text styles, and component libraries |
+| UI layout | Spacing, alignment, and visual hierarchy on a mobile canvas |
+| Asset export | Slicing and exporting images/icons for use in Xcode |
+| Design thinking | Translating a feature idea into a concrete, reviewable screen |
+| Peer collaboration | Giving and receiving design feedback with a classmate |
+| Developer handoff | Annotating designs so a developer can implement them accurately |
 
 ---
 
@@ -30,64 +30,56 @@ This mirrors real-world team development, where you spend as much time reading c
 
 ```
 AppleAcademy-Ch1-HelpAnAcademyFriend/
-├── PrimeShift.xcodeproj/          # Xcode project file
+├── PrimeShift.xcodeproj/          # Reference Xcode project (Academy Eats from Ch0)
 └── PrimeShift/
     ├── PrimeShiftApp.swift        # @main entry point
-    ├── ContentView.swift          # Academy Eats list screen (inherited from Ch0)
+    ├── ContentView.swift          # Academy Eats list screen (reference code)
     └── Assets.xcassets/
         ├── biker.imageset/        # Image asset used in the list
         ├── AppIcon.appiconset/    # App icon
         └── AccentColor.colorset/  # Global tint color
 ```
 
+> The Xcode project is kept as a **reference implementation** — the primary deliverable of this challenge is the Sketch design file and any exported assets.
+
 ---
 
-## 📱 The Screen
+## 🎨 The Design Task
 
-The running app is identical to Challenge 0 — **Academy Eats**, a scrollable list with a biker photo and label. The difference is the *process*: you are now the one receiving the project and must:
+Using the **Academy Eats** app from Challenge 0 as a starting point, the goal is to:
 
-1. Open it cold in Xcode
-2. Identify every view, modifier, and asset
-3. Explain the data flow to a classmate
-4. Suggest or implement a small improvement
+1. Open Sketch and create a new **mobile artboard** (375 × 812 pt — iPhone standard)
+2. Recreate the existing Academy Eats screen as a Sketch design
+3. Propose and design **at least one improvement** (e.g. a detail screen, better typography, or a new colour palette)
+4. Export assets and share the design with a classmate for feedback
+5. Iterate based on the feedback received
 
 ```
 ┌────────────────────────────┐
-│  Academy Eats              │
+│  Academy Eats              │  ← Navigation bar (title)
 ├────────────────────────────┤
-│  [🖼 100×100]  An OG Biker │
+│  [🖼 100×100]  An OG Biker │  ← List row with image + label
 │                            │
 └────────────────────────────┘
+         ↓ design in Sketch ↓
+  [ artboard · components · styles ]
 ```
 
 ---
 
-## 🔑 Key Code
+## 🖌️ Key Sketch Concepts Used
 
-```swift
-// ContentView.swift — read this carefully!
-NavigationStack {
-    List {
-        HStack {
-            Image("biker")
-                .resizable()
-                .frame(width: 100, height: 100)
-                .scaledToFit()
-            Text("An OG Biker")
-        }
-    }
-    .navigationTitle(Text("Academy Eats"))
-}
-```
-
-**Questions to answer while reading:**
-- Why is `NavigationStack` the outermost view?
-- What does `.resizable()` do before `.frame()`?
-- What would happen if you removed the `HStack`?
+- **Artboards** — defining the iPhone canvas size and safe areas
+- **Symbols** — reusable components for navigation bars, list rows, and icons
+- **Text Styles** — consistent typography across the design
+- **Layer Groups** — organising the layer panel to mirror SwiftUI's view hierarchy
+- **Export Slices** — generating `@1x / @2x / @3x` assets for Xcode's asset catalog
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Open the Reference App
+
+If you want to run the existing code as a design reference:
 
 1. Open `PrimeShift.xcodeproj` in **Xcode 15+**
 2. Select any iPhone simulator (e.g. *iPhone 16*)
@@ -95,12 +87,14 @@ NavigationStack {
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tools
 
-- **Language:** Swift 5.9+
-- **UI Framework:** SwiftUI
-- **Minimum Deployment:** iOS 17+
-- **Xcode:** 15+
+| Tool | Purpose |
+|---|---|
+| **Sketch** | UI/UX design and prototyping |
+| Xcode 15+ | Running the reference implementation |
+| Swift / SwiftUI | Reference code language & framework |
+| iOS 17+ | Target platform |
 
 ---
 
