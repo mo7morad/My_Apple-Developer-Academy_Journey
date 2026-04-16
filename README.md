@@ -9,8 +9,8 @@
 
 | # | Folder | App Name | Core Concepts |
 |---|---|---|---|
-| 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | Academy Eats | `NavigationStack`, `List`, `HStack`, `Image`, assets |
-| 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Individual, and Team Design (Sketch) | UI/UX design, Sketch artboards, design-to-dev handoff |
+| 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | PrimeShift (Academy Eats screen) | `NavigationStack`, `List`, `HStack`, `Image`, assets |
+| 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Individual Design (Sketch) | UI/UX design, Sketch artboards, design-to-dev handoff |
 | 2 | [`AppleAcademy-Ch2-Contacts`](./AppleAcademy-Ch2-Contacts) | Contacts | `Dictionary(grouping:)`, sectioned `List`, toolbar, search |
 
 ---
@@ -19,7 +19,7 @@
 
 ### [Challenge 0 — PrimeShift (Academy Eats)](./AppleAcademy-Ch0-PrimeShift)
 
-The **first SwiftUI screen**, built from zero. A scrollable restaurant list that pairs a photo with a label, wrapped in a navigation stack. The goal: get comfortable with Xcode and SwiftUI's declarative view hierarchy before adding any logic.
+The **first SwiftUI screen**, built from zero. A simple list UI that pairs a photo with a label inside a navigation stack. The goal: get comfortable with Xcode and SwiftUI's declarative view hierarchy before adding any logic.
 
 **Key views:** `NavigationStack` › `List` › `HStack` › `Image` + `Text`
 
@@ -91,4 +91,3 @@ Each challenge folder contains its own `README.md` with a deeper breakdown of th
 ## 👤 Author
 
 **Mohamed Morad** — Apple Developer Academy student  
-
