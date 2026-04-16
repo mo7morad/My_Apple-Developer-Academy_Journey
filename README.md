@@ -1,7 +1,7 @@
 # <img src="https://img.icons8.com/?size=100&id=30840&format=png&color=808080" width="20" style="vertical-align:middle;" />  Apple Developer Academy — Challenges
 
-> A collection of Apple Developer Academy challenges spanning both **design** and **SwiftUI development**.  
-> Most folders are self-contained Xcode projects, while Challenge 1 is a Sketch design deliverable.
+> My Journey through Apple Developer Academy challenges spanning both **design** and **SwiftUI development**.  
+> Most folders are self-contained Xcode projects.
 
 ---
 
@@ -9,7 +9,7 @@
 
 | # | Folder | App Name | Core Concepts |
 |---|---|---|---|
-| 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | PrimeShift (Academy Eats screen) | `NavigationStack`, `List`, `HStack`, `Image`, assets |
+| 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | PrimeShift (2 Screen App) | `NavigationStack`, `List`, `HStack`, `Image`, assets |
 | 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Individual Design (Sketch) | UI/UX design, Sketch artboards, design-to-dev handoff |
 | 2 | [`AppleAcademy-Ch2-Contacts`](./AppleAcademy-Ch2-Contacts) | Contacts | `Dictionary(grouping:)`, sectioned `List`, toolbar, search |
 
@@ -17,9 +17,8 @@
 
 ## 📚 Challenge Summaries
 
-### [Challenge 0 — PrimeShift (Academy Eats)](./AppleAcademy-Ch0-PrimeShift)
-
-The **first SwiftUI screen**, built from zero. A simple list UI that pairs a photo with a label inside a navigation stack. The goal: get comfortable with Xcode and SwiftUI's declarative view hierarchy before adding any logic.
+### [Challenge 0 — PrimeShift](./AppleAcademy-Ch0-PrimeShift)
+Was the first challenge I completed. The app was from my choice, and I chose to create this to help me maintain my manual motorcycle maintenance checkups, for each part, also log my learning journey, of how to ride a manual motorcycle.
 
 **Key views:** `NavigationStack` › `List` › `HStack` › `Image` + `Text`
 
@@ -27,7 +26,7 @@ The **first SwiftUI screen**, built from zero. A simple list UI that pairs a pho
 
 ### [Challenge 1 — Help an Academy Friend](./AppleAcademy-Ch1-HelpAnAcademyFriend)
 
-An introduction to **UI/UX design** using **Sketch**. Rather than writing code, this challenge focused on learning the Sketch design tool — artboards, UI components, typography, spacing, and visual hierarchy — and producing an individual design file that captures one or more app screens.
+An introduction to **UI/UX design** using **Sketch**. This challenge focused on learning the Sketch design tool — artboards, UI components, typography, spacing, and visual hierarchy — and producing an individual design file that captures one or more app screens.
 
 **Key skill:** Wireframing and visual design in Sketch, preparing assets and layouts for developer handoff.
 
