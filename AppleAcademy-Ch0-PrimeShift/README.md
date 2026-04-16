@@ -1,13 +1,13 @@
 # 🍕 Challenge 0 — PrimeShift (Academy Eats)
 
 > **Apple Developer Academy** · Challenge 0  
-> *Your very first SwiftUI screen — a restaurant list built from scratch.*
+> *Your very first SwiftUI screen — a simple list UI built from scratch.*
 
 ---
 
 ## 📖 About
 
-**Academy Eats** is the entry-point challenge of the Apple Developer Academy program. The goal is to get comfortable with Xcode, SwiftUI's declarative syntax, and the basic building blocks every iOS app relies on: `NavigationStack`, `List`, `HStack`, `Image`, and `Text`.
+**PrimeShift** is the entry-point challenge of the Apple Developer Academy program. The goal is to get comfortable with Xcode, SwiftUI's declarative syntax, and the basic building blocks every iOS app relies on: `NavigationStack`, `List`, `HStack`, `Image`, and `Text`.
 
 No logic. No state. Pure UI. The perfect zero-to-one moment.
 
@@ -44,7 +44,7 @@ AppleAcademy-Ch0-PrimeShift/
 
 ## 📱 What the App Looks Like
 
-The app opens a single screen titled **"Academy Eats"** containing a scrollable `List`. Each row pairs a square thumbnail (the `biker` image) with the label **"An OG Biker"**, laid out using an `HStack`.
+The app opens a single screen titled **"Academy Eats"** containing a `List` with one row. The row pairs a square thumbnail (the `biker` image from assets) with the label **"An OG Biker"**, laid out using an `HStack`.
 
 ```
 ┌────────────────────────────┐
