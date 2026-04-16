@@ -1,7 +1,7 @@
 # <img src="https://img.icons8.com/?size=100&id=30840&format=png&color=808080" width="20" style="vertical-align:middle;" />  Apple Developer Academy — Challenges
 
-> A collection of SwiftUI challenges completed during the **Apple Developer Academy** program.  
-> Each folder is a self-contained Xcode project that progressively builds iOS development skills.
+> A collection of Apple Developer Academy challenges spanning both **design** and **SwiftUI development**.  
+> Most folders are self-contained Xcode projects, while Challenge 1 is a Sketch design deliverable.
 
 ---
 
@@ -76,9 +76,9 @@ Apple-Developer-Academy-Challenges/
 ├── AppleAcademy-Ch0-PrimeShift/          # Challenge 0
 │   ├── README.md
 │   └── PrimeShift/
-├── AppleAcademy-Ch1-HelpAnAcademyFriend/ # Challenge 1
+├── AppleAcademy-Ch1-HelpAnAcademyFriend/ # Challenge 1 (Design in Sketch)
 │   ├── README.md
-│   └── PrimeShift/
+│   └── My individual Design.sketch
 └── AppleAcademy-Ch2-Contacts/            # Challenge 2
     ├── README.md
     └── Contacts/
