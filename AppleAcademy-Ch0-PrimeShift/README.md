@@ -1,13 +1,13 @@
-# 🍕 Challenge 0 — PrimeShift (Academy Eats)
+# Challenge 0 — PrimeShift
 
 > **Apple Developer Academy** · Challenge 0  
-> *Your very first SwiftUI screen — a simple list UI built from scratch.*
+> *My very first App — a simple 2 screen app*
 
 ---
 
 ## 📖 About
 
-**PrimeShift** is the entry-point challenge of the Apple Developer Academy program. The goal is to get comfortable with Xcode, SwiftUI's declarative syntax, and the basic building blocks every iOS app relies on: `NavigationStack`, `List`, `HStack`, `Image`, and `Text`.
+**PrimeShift** was the entry-point challenge of the Apple Developer Academy program. The goal is to get comfortable with Xcode, SwiftUI's declarative syntax, and the basic building blocks every iOS app relies on: `NavigationStack`, `List`, `HStack`, `Image`, and `Text`.
 
 No logic. No state. Pure UI. The perfect zero-to-one moment.
 
