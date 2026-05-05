@@ -1,7 +1,7 @@
 # <img src="https://img.icons8.com/?size=100&id=30840&format=png&color=808080" width="20" style="vertical-align:middle;" />  Apple Developer Academy — Challenges
 
-> A collection of SwiftUI challenges completed during the **Apple Developer Academy** program.  
-> Each folder is a self-contained Xcode project that progressively builds iOS development skills.
+> My Journey through Apple Developer Academy challenges spanning both **design** and **SwiftUI development**.  
+> Most folders are self-contained Xcode projects.
 
 ---
 
@@ -9,17 +9,16 @@
 
 | # | Folder | App Name | Core Concepts |
 |---|---|---|---|
-| 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | Academy Eats | `NavigationStack`, `List`, `HStack`, `Image`, assets |
-| 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Academy Eats (peer read) | Code reading, SwiftUI layout, peer programming |
+| 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | PrimeShift (2 Screen App) | `NavigationStack`, `List`, `HStack`, `Image`, assets |
+| 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Individual Design (Sketch) | UI/UX design, Sketch artboards, design-to-dev handoff |
 | 2 | [`AppleAcademy-Ch2-Contacts`](./AppleAcademy-Ch2-Contacts) | Contacts | `Dictionary(grouping:)`, sectioned `List`, toolbar, search |
 
 ---
 
 ## 📚 Challenge Summaries
 
-### [Challenge 0 — PrimeShift (Academy Eats)](./AppleAcademy-Ch0-PrimeShift)
-
-The **first SwiftUI screen**, built from zero. A scrollable restaurant list that pairs a photo with a label, wrapped in a navigation stack. The goal: get comfortable with Xcode and SwiftUI's declarative view hierarchy before adding any logic.
+### [Challenge 0 — PrimeShift](./AppleAcademy-Ch0-PrimeShift)
+Was the first challenge I completed. The app was from my choice, and I chose to create this to help me maintain my manual motorcycle maintenance checkups, for each part, also log my learning journey, of how to ride a manual motorcycle.
 
 **Key views:** `NavigationStack` › `List` › `HStack` › `Image` + `Text`
 
@@ -27,9 +26,9 @@ The **first SwiftUI screen**, built from zero. A scrollable restaurant list that
 
 ### [Challenge 1 — Help an Academy Friend](./AppleAcademy-Ch1-HelpAnAcademyFriend)
 
-Same app as Challenge 0, but the challenge flips — **you are handed someone else's code** and must read, understand, and explain it. Mirrors real-world team development where reading code is as important as writing it.
+An introduction to **UI/UX design** using **Sketch**. This challenge focused on learning the Sketch design tool — artboards, UI components, typography, spacing, and visual hierarchy — and producing an individual design file that captures one or more app screens.
 
-**Key skill:** Cold-reading an Xcode project, tracing view modifiers, and articulating design decisions to a peer.
+**Key skill:** Wireframing and visual design in Sketch, preparing assets and layouts for developer handoff.
 
 ---
 
@@ -76,9 +75,9 @@ Apple-Developer-Academy-Challenges/
 ├── AppleAcademy-Ch0-PrimeShift/          # Challenge 0
 │   ├── README.md
 │   └── PrimeShift/
-├── AppleAcademy-Ch1-HelpAnAcademyFriend/ # Challenge 1
+├── AppleAcademy-Ch1-HelpAnAcademyFriend/ # Challenge 1 (Design in Sketch)
 │   ├── README.md
-│   └── PrimeShift/
+│   └── My individual Design.sketch
 └── AppleAcademy-Ch2-Contacts/            # Challenge 2
     ├── README.md
     └── Contacts/
@@ -91,8 +90,3 @@ Each challenge folder contains its own `README.md` with a deeper breakdown of th
 ## 👤 Author
 
 **Mohamed Morad** — Apple Developer Academy student  
-Contributions from: Javier Fransiscus (Ch2 static view)
-
----
-
-*Challenges are numbered from 0 because developers start counting from zero. 🙂*

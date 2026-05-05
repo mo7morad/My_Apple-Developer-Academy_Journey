@@ -1,15 +1,15 @@
-# 🤝 Challenge 1 — Help an Academy Friend
+# 🎨 Challenge 1 — Help an Academy Friend
 
 > **Apple Developer Academy** · Challenge 1  
-> *Read someone else's code, understand it, and extend it — a core developer skill.*
+> *Learn the fundamentals of UI/UX design using Sketch.*
 
 ---
 
 ## 📖 About
 
-**Help an Academy Friend** takes the same **Academy Eats** codebase from Challenge 0 and asks you to step into a peer's shoes. The challenge isn't writing new code from scratch — it's *reading* unfamiliar SwiftUI code, understanding what every line does, and then being able to explain and build on top of it.
+**Help an Academy Friend** was an introduction to **design thinking and visual design tools**. The challenge centred on learning **Sketch** — the industry-standard macOS design application — and producing an individual design artefact that could later support a peer's project.
 
-This mirrors real-world team development, where you spend as much time reading code as writing it.
+Rather than writing code, the focus shifted to wireframing, creating UI components, working with artboards, and understanding the design-to-development handoff process.
 
 ---
 
@@ -17,12 +17,11 @@ This mirrors real-world team development, where you spend as much time reading c
 
 | Concept | What you practice |
 |---|---|
-| Code reading | Navigating an unfamiliar Xcode project confidently |
-| `NavigationStack` | Understanding navigation container behavior |
-| `List` + `HStack` | Decomposing row-based layouts |
-| `Image` (asset catalog) | Tracing where assets come from and how they're displayed |
-| Pair / peer programming | Explaining code choices out loud to a partner |
-| SwiftUI preview | Using `#Preview` to rapidly inspect UI without running the full app |
+| Sketch basics | Artboards, shapes, text styles, and layer organisation |
+| UI/UX design | Laying out screens with visual hierarchy and spacing |
+| Design thinking | Empathising with users and iterating on a visual idea |
+| Asset export | Preparing images and icons for developers |
+| Design handoff | Communicating design decisions to a development peer |
 
 ---
 
@@ -30,77 +29,35 @@ This mirrors real-world team development, where you spend as much time reading c
 
 ```
 AppleAcademy-Ch1-HelpAnAcademyFriend/
-├── PrimeShift.xcodeproj/          # Xcode project file
-└── PrimeShift/
-    ├── PrimeShiftApp.swift        # @main entry point
-    ├── ContentView.swift          # Academy Eats list screen (inherited from Ch0)
-    └── Assets.xcassets/
-        ├── biker.imageset/        # Image asset used in the list
-        ├── AppIcon.appiconset/    # App icon
-        └── AccentColor.colorset/  # Global tint color
+└── My individual Design.sketch   # Sketch design file with artboards and UI components
 ```
 
 ---
 
-## 📱 The Screen
+## 🖼️ The Deliverable
 
-The running app is identical to Challenge 0 — **Academy Eats**, a scrollable list with a biker photo and label. The difference is the *process*: you are now the one receiving the project and must:
+The output of this challenge is a **Sketch file** (`My individual Design.sketch`) containing:
 
-1. Open it cold in Xcode
-2. Identify every view, modifier, and asset
-3. Explain the data flow to a classmate
-4. Suggest or implement a small improvement
-
-```
-┌────────────────────────────┐
-│  Academy Eats              │
-├────────────────────────────┤
-│  [🖼 100×100]  An OG Biker │
-│                            │
-└────────────────────────────┘
-```
+- Artboards representing one or more app screens
+- UI components (buttons, lists, images, text) laid out with care for spacing and hierarchy
+- A visual design that a developer could use as a reference to implement the UI in SwiftUI
 
 ---
 
-## 🔑 Key Code
+## 🛠️ Tools Used
 
-```swift
-// ContentView.swift — read this carefully!
-NavigationStack {
-    List {
-        HStack {
-            Image("biker")
-                .resizable()
-                .frame(width: 100, height: 100)
-                .scaledToFit()
-            Text("An OG Biker")
-        }
-    }
-    .navigationTitle(Text("Academy Eats"))
-}
-```
-
-**Questions to answer while reading:**
-- Why is `NavigationStack` the outermost view?
-- What does `.resizable()` do before `.frame()`?
-- What would happen if you removed the `HStack`?
+| Tool | Details |
+|---|---|
+| Design App | [Sketch](https://www.sketch.com/) (macOS) |
+| Design Format | `.sketch` |
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Open
 
-1. Open `PrimeShift.xcodeproj` in **Xcode 15+**
-2. Select any iPhone simulator (e.g. *iPhone 16*)
-3. Press **⌘ R**
-
----
-
-## 🛠️ Tech Stack
-
-- **Language:** Swift 5.9+
-- **UI Framework:** SwiftUI
-- **Minimum Deployment:** iOS 17+
-- **Xcode:** 15+
+1. Install **Sketch** from [sketch.com](https://www.sketch.com/) or the Mac App Store
+2. Open `My individual Design.sketch`
+3. Browse the artboards in the left-hand layers panel
 
 ---
 
