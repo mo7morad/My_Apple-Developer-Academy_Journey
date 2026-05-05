@@ -5,7 +5,7 @@
 
 ## About
 
-PrimeShift is my starter SwiftUI project for Challenge 0.  
+PrimeShift is my starter INDIVIDUAL SwiftUI project for Challenge 0.  
 I built it to practice the basics of Xcode and SwiftUI layout.
 
 This app currently has **one screen** (not two): a simple list inside a `NavigationStack`.
