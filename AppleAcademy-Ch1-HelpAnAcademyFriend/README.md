@@ -1,6 +1,6 @@
 # 🎨 Challenge 1 — Help an Academy Friend
 
-> **Apple Developer Academy** · Challenge 1  
+> **Apple Developer Academy** · Challenge 1  (TEAM)
 > *Learn the fundamentals of UI/UX design using Sketch.*
 
 ---
