@@ -7,7 +7,7 @@
 
 ## 📖 About
 
-**Help an Academy Friend** was an introduction to **design thinking and visual design tools**. The challenge centred on learning **Sketch** — the industry-standard macOS design application — and producing an individual design artefact that could later support a peer's project.
+**Help an Academy Friend** was an introduction to how to emphasize with the user who we are creating for (Human centric design) **design thinking and visual design tools**. The challenge centred on learning **Sketch** — the Apple industry-standard design application — and producing an individual design artefact that could later support a peer's project.
 
 Rather than writing code, the focus shifted to wireframing, creating UI components, working with artboards, and understanding the design-to-development handoff process.
 
