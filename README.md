@@ -18,7 +18,7 @@
 ## 📚 Challenge Summaries
 
 ### [Challenge 0 — PrimeShift](./AppleAcademy-Ch0-PrimeShift)
-Was the first challenge I completed (INDIVIDUAL). The app was from my choice, and I chose to create this to help me maintain my manual motorcycle maintenance checkups, for each part, also log my learning journey, of how to ride a manual motorcycle.
+Was the first challenge I completed this individual challenge. The app was from my choice, and I chose to create this to help me maintain my manual motorcycle maintenance checkups, for each part, also log my learning journey, of how to ride a manual motorcycle.
 
 **Key views:** `NavigationStack` › `List` › `HStack` › `Image` + `Text`
 
