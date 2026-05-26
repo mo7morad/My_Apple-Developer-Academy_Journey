@@ -93,8 +93,6 @@ final class OnboardingViewModel {
         do {
             try context.save()
         } catch {
-            // In a production app you'd surface this error to the user.
-            // For now, log it and bail out without setting isComplete.
             print("Failed to save UserProfile: \(error)")
             return
         }
