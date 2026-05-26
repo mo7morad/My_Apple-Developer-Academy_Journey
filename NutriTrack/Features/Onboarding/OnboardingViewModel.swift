@@ -1,8 +1,8 @@
 import Foundation
+import SwiftData
 
-// @Observable is the modern Swift 5.9+ observation system. Unlike ObservableObject,
-// you don't need to mark individual properties with @Published — the macro tracks
-// all stored properties automatically. Views that read a property are re-rendered
+// @Observable is the modern observation system
+// the macro tracks all stored properties automatically. Views that read a property are re-rendered
 // only when that specific property changes.
 //
 // @MainActor pins the entire class to the main thread. All property reads/writes

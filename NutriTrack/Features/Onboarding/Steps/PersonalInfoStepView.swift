@@ -25,7 +25,7 @@ struct PersonalInfoStepView: View {
 
                 // MARK: Name
                 fieldLabel("Your name")
-                TextField("e.g. Mohamed", text: $viewModel.name)
+                TextField("e.g. Taka Taka", text: $viewModel.name)
                     .textFieldStyle(.roundedBorder)
                     .textContentType(.givenName)
                     .autocorrectionDisabled()

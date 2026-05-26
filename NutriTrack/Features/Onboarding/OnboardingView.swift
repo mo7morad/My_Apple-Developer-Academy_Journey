@@ -73,30 +73,6 @@ struct OnboardingView: View {
     }
 }
 
-// Step progress bar — three dots that fill as the user advances.
-private struct StepProgressBar: View {
-    let currentStep: OnboardingViewModel.Step
-
-    private var stepIndex: Int {
-        switch currentStep {
-        case .personalInfo:  return 0
-        case .goalSelection: return 1
-        case .summary:       return 2
-        }
-    }
-
-    var body: some View {
-        HStack(spacing: 6) {
-            ForEach(0..<3) { index in
-                Capsule()
-                    .fill(index <= stepIndex ? Color.accentColor : Color(.systemGray5))
-                    .frame(height: 4)
-                    .animation(.easeInOut, value: stepIndex)
-            }
-        }
-    }
-}
-
 #Preview {
     OnboardingView(onComplete: {})
 }
