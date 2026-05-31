@@ -15,8 +15,6 @@ Rather than writing code, the focus shifted to wireframing, creating UI componen
 
 ## 🎬 Final Team HiFi (Screen Recording)
 
-[![Watch the screen recording] 
-
 https://github.com/user-attachments/assets/41e87a7c-ab40-4fce-a5ec-52dad7039f32
 
 
