@@ -10,6 +10,12 @@ I built it to practice the basics of Xcode and SwiftUI layout.
 
 This app currently has **one screen** (not two): a simple list inside a `NavigationStack`.
 
+## Screenshots
+
+| | | |
+|---|---|---|
+| ![PrimeShift screenshot 1](../Resources/PrimeShift1.png) | ![PrimeShift screenshot 2](../Resources/PrimeShift2.png) | ![PrimeShift screenshot 3](../Resources/PrimeShift3.png) |
+
 ## What I built
 
 - A `NavigationStack` with the title **Academy Eats**
