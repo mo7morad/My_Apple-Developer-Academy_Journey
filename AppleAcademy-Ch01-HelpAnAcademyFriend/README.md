@@ -15,7 +15,11 @@ Rather than writing code, the focus shifted to wireframing, creating UI componen
 
 ## 🎬 Final Team HiFi (Screen Recording)
 
-[![Watch the screen recording](../Resources/ch01-team-hifi-preview.svg)](https://raw.githubusercontent.com/mo7morad/Apple-Developer-Academy-Challenges/main/Resources/Ch01-Team%27s_Final_HIFI.mp4)
+[![Watch the screen recording] 
+
+https://github.com/user-attachments/assets/41e87a7c-ab40-4fce-a5ec-52dad7039f32
+
+
 
 Preview:
 
