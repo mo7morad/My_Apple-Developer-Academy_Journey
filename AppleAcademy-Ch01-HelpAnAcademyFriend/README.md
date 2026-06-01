@@ -7,7 +7,7 @@
 
 ## 📖 About
 
-**Help an Academy Friend** was an introduction to how to emphasize with the user who we are creating for (Human centric design) **design thinking and visual design tools**. The challenge centred o[...]
+**Help an Academy Friend** was an introduction to how to emphasize with the user who we are creating for (Human centric design) **design thinking and visual design tools**.
 
 Rather than writing code, the focus shifted to wireframing, creating UI components, working with artboards, and understanding the design-to-development handoff process.
 
