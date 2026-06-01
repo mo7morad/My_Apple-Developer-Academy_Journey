@@ -36,7 +36,7 @@ Wireframing and visual design in Sketch, preparing assets and layouts for develo
 
 ### [Challenge 2 — Contacts](./AppleAcademy-Ch2-Contacts)
 
-A (DUO) project **clone of Apple's Contacts app** built in two stages:
+A (DUO) project **clone with a remix of Apple's Contacts app** built in two stages:
 
 1. **Static** (`AcademyVersion.swift`) — hardcoded contacts and sections, built by hand to understand the exact structure.
 2. **Dynamic** (`DictionaryViewVersion.swift`) — the same UI powered by `Dictionary(grouping:)`, making it trivial to add or remove contacts.
