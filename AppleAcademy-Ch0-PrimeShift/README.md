@@ -14,7 +14,7 @@ This app currently has **one screen** (not two): a simple list inside a `Navigat
 
 | | | |
 |---|---|---|
-| ![PrimeShift screenshot 1](../Resources/PrimeShift1.png) | ![PrimeShift screenshot 2](../Resources/PrimeShift2.png) | ![PrimeShift screenshot 3](../Resources/PrimeShift3.png) |
+| ![PrimeShift screenshot 1](../Resources/Ch0-PrimeShift1.png) | ![PrimeShift screenshot 2](../Resources/Ch0-PrimeShift2.png) | ![PrimeShift screenshot 3](../Resources/Ch0-PrimeShift3.png) |
 
 ## What I built
 
