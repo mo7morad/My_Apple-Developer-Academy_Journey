@@ -64,25 +64,6 @@ AppleAcademy-Ch2-Contacts/
 
 ---
 
-## 📱 Static Version — `StaticContactsView`
-
-A pixel-faithful recreation of the iOS Contacts app with **hardcoded data**. Every contact, every section header, and every alphabet index label is manually written.
-
-```
-┌──────────────────────────────┐
-│  Contacts           🔍       │  ← navigationTitle + inline search
-├──────────────────────────────┤
-│  ⬤ CL  Charles Leclerc      │  ← "My Card" row
-│                              │
-│  C                           │  ← Section header
-│  ⬤ CL  Charles Leclerc      │
-│                              │
-│  G                           │
-│  ⬤ GR  George Russell       │
-├──────────────────────────────┤
-│  [search]      [+]           │  ← bottom toolbar
-└──────────────────────────────┘
-```
 
 **Key techniques:**
 - `Circle()` + `ZStack` to create letter avatars
