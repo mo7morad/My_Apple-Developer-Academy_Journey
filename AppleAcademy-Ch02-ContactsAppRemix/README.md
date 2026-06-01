@@ -148,23 +148,5 @@ ForEach(sectionHeaders, id: \.self) { header in
 
 ---
 
-## 🛠️ Tech Stack
-
-- **Language:** Swift 5.9+
-- **UI Framework:** SwiftUI
-- **Minimum Deployment:** iOS 17+
-- **Xcode:** 15+
-
----
-
-## 👥 Contributors
-
-| Name | Role |
-|---|---|
-| Mohamed Morad | Dynamic view (`DictionaryViewVersion.swift`), App entry point |
-| Javier Fransiscus | Static view (`AcademyVersion.swift`) |
-
----
-
 *Apple Developer Academy · Challenge 2*
 
