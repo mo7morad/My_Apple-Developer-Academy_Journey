@@ -36,7 +36,7 @@ struct HomeView: View {
                     // MARK: - Header
 
                     Button("Start Painting") {
-                        showPhotoPicker = true
+                        showModePicker = true
                     }
                     .font(.title3.weight(.medium))
                     .buttonStyle(.borderedProminent)
