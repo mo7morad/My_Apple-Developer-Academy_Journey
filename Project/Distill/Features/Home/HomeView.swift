@@ -1,8 +1,20 @@
 import SwiftUI
 import PhotosUI
 import os
+import SwiftData
 
 struct HomeView: View {
+    
+    // MARK: - Setting up for dummy grid
+    
+    @Environment(\.modelContext)
+    private var modelContext
+
+    @Query(sort: \JournalEntry.createdAt, order: .reverse)
+    private var journalEntries: [JournalEntry]
+
+    private let imageStore = ImageStore()
+    private let generator = PaintingGenerator()
 
     // MARK: - State
 
@@ -31,8 +43,50 @@ struct HomeView: View {
                 Spacer()
                 
                 Divider()
+                    .padding(.top, 50)
                 
                 // MARK: - Painting Grid
+                // currently this displays dummy paintings
+                
+                ScrollView {
+
+                    LazyVGrid(
+                        columns: [
+                            GridItem(.adaptive(minimum: 150), spacing: 50)
+                        ],
+                        spacing: 50
+                    ) {
+
+                        ForEach(journalEntries) { entry in
+
+                            if let image = imageStore.loadPainting(
+                                identifier: entry.paintingImageIdentifier
+                            ) {
+
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 150, height: 150)
+                                    .clipShape(
+                                        RoundedRectangle(cornerRadius: 18)
+                                    )
+                                    .contentShape(
+                                        RoundedRectangle(cornerRadius: 18)
+                                    )
+                                    .onTapGesture {
+
+                                        // TODO: - Viewer modal / carousel
+
+                                    }
+                            }
+
+                        }
+
+                    }
+
+                    .padding(50)
+
+                }
                 
             }
             .navigationTitle("Distill")
@@ -114,6 +168,28 @@ struct HomeView: View {
                         }
 
                         // TODO: do something with colors — pass to your canvas, update @State, etc.
+                        // (test) Generate a placeholder painting
+                        let generatedPainting = generator.generate(from: colors)
+
+                        // (test) Save both images to disk
+                        let referenceIdentifier = try imageStore.saveReference(originalImage)
+                        let paintingIdentifier = try imageStore.savePainting(generatedPainting)
+
+                        // (test) Create the journal entry
+                        let entry = JournalEntry(
+                            referenceImageIdentifier: referenceIdentifier,
+                            paintingImageIdentifier: paintingIdentifier,
+                            paletteHex: colors.map(\.hex)
+                        )
+                        modelContext.insert(entry)
+
+                        do {
+                            try modelContext.save()
+                            logger.debug("Journal entry saved successfully.")
+                        } catch {
+                            logger.error("Failed to save journal entry: \(error.localizedDescription)")
+                            errorMessage = "Couldn't save your painting."
+                        }
 
                     } catch {
                         logger.error("Color extraction failed: \(error.localizedDescription)")
