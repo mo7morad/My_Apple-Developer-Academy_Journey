@@ -34,8 +34,7 @@ We dropped it because:
 While the Photos app has this feature of image recognition, and binding the image with people, as 3rd party app, we don't have access to this meta-data, so we dropped, also having LLM that does classification and recognition is very complex, so we dropped it twice ^__^
 
 ---
-## Real Limitations Hit --Pending--
-
+## Real Limitations Hit
 *What broke, what didn't behave the way the documentation said it would, where AI genuinely couldn't help you.*
 Example:<br/>[ Describe the situation ]
 We initially planned to let users filter photos by selecting specific people (for example, "show me only photos with Ahmed and Sarah"). However, during development we discovered that third-party iOS apps cannot access the Photos app's person-recognition metadata. We also explored using an AI/LLM-based image recognition system to identify people ourselves, but implementing a reliable face recognition pipeline was far beyond the scope and complexity of our project.
