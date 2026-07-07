@@ -103,12 +103,6 @@ struct HomeView: View {
             .sheet(item: $selectedEntry) { entry in
                 CarouselView(entry: entry)
             }
-            .alert("About Distill", isPresented: $showAbout) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                // TODO: Replace with real app description text
-                Text("Distill helps you capture and revisit your paintings.")
-            }
             .alert(
                 "Delete \(selectedEntries.count) Painting\(selectedEntries.count == 1 ? "" : "s")?",
                 isPresented: $showDeleteConfirmation
@@ -228,6 +222,19 @@ struct HomeView: View {
                     Image(systemName: "info.circle")
                 }
                 .accessibilityLabel("About Distill")
+                .popover(isPresented: $showAbout) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Distill")
+                            .font(.headline)
+
+                        // TODO: Replace Rania's Design description
+                        Text("Distill helps you capture and revisit your paintings.")
+                            .font(.body)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding()
+                    .presentationCompactAdaptation(.popover) // stays a popover even on iPhone if space allows
+                }
             }
         }
     }
