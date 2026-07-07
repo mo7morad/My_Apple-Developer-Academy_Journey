@@ -30,6 +30,7 @@ struct HomeView: View {
     @State private var isSelecting: Bool = false
     @State private var selectedEntries: Set<JournalEntry.ID> = []
     @State private var showDeleteConfirmation: Bool = false
+    @State private var showAbout: Bool = false
     
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -101,6 +102,12 @@ struct HomeView: View {
             }
             .sheet(item: $selectedEntry) { entry in
                 CarouselView(entry: entry)
+            }
+            .alert("About Distill", isPresented: $showAbout) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                // TODO: Replace with real app description text
+                Text("Distill helps you capture and revisit your paintings.")
             }
             .alert(
                 "Delete \(selectedEntries.count) Painting\(selectedEntries.count == 1 ? "" : "s")?",
@@ -211,12 +218,12 @@ struct HomeView: View {
                 Button {
                     // TODO: Translate
                 } label: {
-                    Image(systemName: "translate")
+                    Image(systemName: "bell")
                 }
-                .accessibilityLabel("Translate")
+                .accessibilityLabel("Notifications")
 
                 Button {
-                    // TODO: About Distill
+                    showAbout = true
                 } label: {
                     Image(systemName: "info.circle")
                 }
