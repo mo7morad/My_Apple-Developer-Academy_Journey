@@ -24,7 +24,7 @@ struct GenerationView: View {
     @State private var isPulsing = false
     @State private var hasStarted = false
 
-    private let minimumDuration: Duration = .seconds(2)
+    private var minimumDuration: Duration { .seconds(Double.random(in: 2...5)) }
 
     var body: some View {
         NavigationStack {
