@@ -7,16 +7,15 @@ struct CarouselView: View {
 
     @Environment(\.dismiss)
     private var dismiss
-    
+
     @Environment(\.modelContext)
     private var modelContext
 
-    @State
-    private var showDeleteAlert = false
+    // MARK: - State
 
+    @State private var viewModel = CarouselViewModel()
+    @State private var showDeleteAlert = false
     @State private var showingReference = false
-
-    private let imageStore = ImageStore()
 
     var body: some View {
 
@@ -26,7 +25,7 @@ struct CarouselView: View {
 
                 Spacer()
 
-                if let image = displayedImage {
+                if let image = viewModel.displayedImage(for: entry, showingReference: showingReference) {
 
                     Image(uiImage: image)
                         .resizable()
@@ -38,7 +37,7 @@ struct CarouselView: View {
 
             }
             .padding()
-            .navigationTitle(title)
+            .navigationTitle(viewModel.title(for: entry))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
 
@@ -101,9 +100,14 @@ struct CarouselView: View {
                 Button("Cancel", role: .cancel) { }
 
                 Button("Delete", role: .destructive) {
-
-                    deletePainting()
-
+                    // ViewModel handles files + SwiftData; View handles dismiss.
+                    do {
+                        try viewModel.delete(entry, from: modelContext)
+                        dismiss()
+                    } catch {
+                        // TODO: surface this error via an alert
+                        print("Delete failed: \(error)")
+                    }
                 }
 
             } message: {
@@ -111,63 +115,6 @@ struct CarouselView: View {
                 Text("This can't be undone.")
 
             }
-
-        }
-
-    }
-
-    private var displayedImage: UIImage? {
-
-        if showingReference {
-
-            return imageStore.loadReference(
-                identifier: entry.referenceImageIdentifier
-            )
-
-        }
-
-        return imageStore.loadPainting(
-            identifier: entry.paintingImageIdentifier
-        )
-
-    }
-
-    private var title: String {
-
-        if entry.isToday {
-
-            return "Today"
-
-        }
-
-        return entry.createdAt.formatted(
-            date: .complete,
-            time: .omitted
-        )
-
-    }
-    
-    private func deletePainting() {
-
-        imageStore.deletePainting(
-            identifier: entry.paintingImageIdentifier
-        )
-
-        imageStore.deleteReference(
-            identifier: entry.referenceImageIdentifier
-        )
-
-        modelContext.delete(entry)
-
-        do {
-
-            try modelContext.save()
-
-            dismiss()
-
-        } catch {
-
-            print(error)
 
         }
 

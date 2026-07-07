@@ -25,7 +25,12 @@ struct HomeView: View {
     @State private var viewModel = HomeViewModel()
     @State private var showPhotoPicker = false
     @State private var selectedPhotoItem: PhotosPickerItem?
-
+    @State private var selectedEntry: JournalEntry?
+    @State private var generationRequest: GenerationRequest?
+    @State private var isSelecting: Bool = false
+    @State private var selectedEntries: Set<JournalEntry.ID> = []
+    @State private var showDeleteConfirmation: Bool = false
+    
     var body: some View {
         @Bindable var viewModel = viewModel
 
@@ -36,7 +41,7 @@ struct HomeView: View {
                     // MARK: - Header
 
                     Button("Start Painting") {
-                        showModePicker = true
+                        showPhotoPicker = true
                     }
                     .font(.title3.weight(.medium))
                     .buttonStyle(.borderedProminent)
@@ -81,11 +86,36 @@ struct HomeView: View {
                 Text(message)
             }
             .onChange(of: selectedPhotoItem) { _, newItem in
-                guard let newItem else { return }
+                // Ignore duplicate fires (incl. the picker's own) while a
+                // generation is already in flight.
+                guard let newItem, generationRequest == nil else { return }
                 Task {
                     defer { selectedPhotoItem = nil }
-                    await viewModel.process(newItem, into: modelContext)
+                    if let image = await viewModel.loadImage(from: newItem) {
+                        generationRequest = GenerationRequest(image: image)
+                    }
                 }
+            }
+            .fullScreenCover(item: $generationRequest) { request in
+                GenerationView(referenceImage: request.image, viewModel: viewModel)
+            }
+            .sheet(item: $selectedEntry) { entry in
+                CarouselView(entry: entry)
+            }
+            .alert(
+                "Delete \(selectedEntries.count) Painting\(selectedEntries.count == 1 ? "" : "s")?",
+                isPresented: $showDeleteConfirmation
+            ) {
+                Button("Cancel", role: .cancel) { }
+
+                Button("Delete", role: .destructive) {
+                    // Confirmed — now actually delete and exit selection mode.
+                    viewModel.deleteSelectedEntries(selectedEntries, from: journalEntries, context: modelContext)
+                    isSelecting = false
+                    selectedEntries = []
+                }
+            } message: {
+                Text("This can't be undone.")
             }
         }
     }
@@ -101,9 +131,23 @@ struct HomeView: View {
         ) {
             ForEach(journalEntries) { entry in
                 if let image = viewModel.loadPainting(identifier: entry.paintingImageIdentifier) {
-                    PaintingCard(image: image, paletteHex: entry.paletteHex)
+                    PaintingCard(
+                                    image: image,
+                                    paletteHex: entry.paletteHex,
+                                    isSelecting: isSelecting,
+                                    // Pass whether THIS specific entry is in the selected set.
+                                    isSelected: selectedEntries.contains(entry.id)
+                                )
                         .onTapGesture {
-                            // TODO: Viewer modal / carousel
+                            if isSelecting {
+                                if selectedEntries.contains(entry.id) {
+                                    selectedEntries.remove(entry.id) // already selected → deselect
+                                } else {
+                                    selectedEntries.insert(entry.id) // not selected → select
+                                }
+                            } else {
+                                selectedEntry = entry // normal mode → open carousel
+                            }
                         }
                 }
             }
@@ -113,30 +157,80 @@ struct HomeView: View {
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
-            Button("Select") {
-                // TODO: Enter selection mode
-            }
-        }
+        if isSelecting {
 
-        ToolbarSpacer(.fixed, placement: .topBarTrailing)
+            // MARK: Selection mode toolbar
 
-        ToolbarItemGroup(placement: .topBarTrailing) {
-            Button {
-                // TODO: Translate
-            } label: {
-                Image(systemName: "translate")
+            // "Done" exits selection mode and clears any selections.
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isSelecting = false
+                    selectedEntries = []
+                } label: {
+                    Image(systemName: "checkmark.circle.fill")
+                }
+                .accessibilityLabel("Done")
             }
-            .accessibilityLabel("Translate")
 
-            Button {
-                // TODO: About Distill
-            } label: {
-                Image(systemName: "info.circle")
+            ToolbarSpacer(.fixed, placement: .topBarTrailing)
+
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Button {
+                    // TODO: Share selected entries
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .accessibilityLabel("Share")
+
+                Button(role: .destructive) {
+                    // Don't delete immediately — show a confirmation alert first.
+                    // This is Apple's standard destructive action pattern.
+                    showDeleteConfirmation = true
+                } label: {
+                    Image(systemName: "trash")
+                }
+                .accessibilityLabel("Delete")
+                // Disabled when nothing is selected — no point confirming an empty action.
+                .disabled(selectedEntries.isEmpty)
             }
-            .accessibilityLabel("About Distill")
+
+        } else {
+
+            // MARK: Normal toolbar
+
+            // Label is just "Select" — no state variable needed.
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Select") {
+                    isSelecting = true
+                }
+            }
+
+            ToolbarSpacer(.fixed, placement: .topBarTrailing)
+
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Button {
+                    // TODO: Translate
+                } label: {
+                    Image(systemName: "translate")
+                }
+                .accessibilityLabel("Translate")
+
+                Button {
+                    // TODO: About Distill
+                } label: {
+                    Image(systemName: "info.circle")
+                }
+                .accessibilityLabel("About Distill")
+            }
         }
     }
+}
+
+/// Wraps a picked `UIImage` so it can drive `fullScreenCover(item:)`,
+/// which requires an `Identifiable` value (`UIImage` isn't one).
+private struct GenerationRequest: Identifiable {
+    let id = UUID()
+    let image: UIImage
 }
 
 #Preview {
