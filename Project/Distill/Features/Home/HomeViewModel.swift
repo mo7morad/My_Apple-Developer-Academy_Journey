@@ -1,6 +1,7 @@
 import SwiftUI
 import PhotosUI
 import SwiftData
+import os
 
 @Observable
 @MainActor
@@ -16,6 +17,11 @@ final class HomeViewModel {
     private let imageStore = ImageStore()
     private let generator = PaintingGenerator()
     private let extractor = DominantColorExtractor()
+
+    private let logger = Logger(
+        subsystem: "com.morad.Distill",
+        category: "ColorExtraction"
+    )
 
     // MARK: - Painting loading
 
@@ -35,6 +41,7 @@ final class HomeViewModel {
         do {
             try context.save()
         } catch {
+            logger.error("Failed to delete entry: \(error.localizedDescription)")
             fail("Couldn't delete the painting. Please try again.")
         }
     }
@@ -71,6 +78,7 @@ final class HomeViewModel {
             return originalImage
 
         } catch {
+            logger.error("Failed to load photo: \(error.localizedDescription)")
             fail("Couldn't load that photo. Try a different one.")
             return nil
         }
@@ -123,6 +131,7 @@ final class HomeViewModel {
             )
 
             context.insert(entry)
+
             try context.save()
 
             logger.debug("Journal entry saved successfully.")
