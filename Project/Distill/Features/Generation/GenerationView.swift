@@ -24,7 +24,7 @@ struct GenerationView: View {
     @State private var isPulsing = false
     @State private var hasStarted = false
 
-    private let minimumDuration: Duration = .seconds(5)
+    private let minimumDuration: Duration = .seconds(2)
 
     var body: some View {
         NavigationStack {
@@ -52,13 +52,15 @@ struct GenerationView: View {
             .navigationBarTitleDisplayMode(.inline)
             .interactiveDismissDisabled()
         }
-        .task {
-            // `.task` on a NavigationStack inside a fullScreenCover can fire
-            // more than once; make sure the pipeline runs exactly once.
+        .onAppear {
+            // `.onAppear`/`.task` can fire more than once for a NavigationStack
+            // inside a cover — run once. We launch an independent Task rather
+            // than using `.task`, because `.task` cancels its work when the
+            // view churns, which would kill the timed wait early.
             guard !hasStarted else { return }
             hasStarted = true
             startPulsing()
-            await runGeneration()
+            Task { await runGeneration() }
         }
     }
 

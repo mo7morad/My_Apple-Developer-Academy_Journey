@@ -29,6 +29,32 @@ final class HomeViewModel {
         imageStore.loadPainting(identifier: identifier)
     }
 
+    // MARK: - Deletion
+
+    /// Deletes one entry's files from disk and removes its SwiftData record.
+    /// Errors are surfaced via the existing alert mechanism.
+    func delete(_ entry: JournalEntry, from context: ModelContext) {
+        imageStore.deletePainting(identifier: entry.paintingImageIdentifier)
+        imageStore.deleteReference(identifier: entry.referenceImageIdentifier)
+        context.delete(entry)
+        do {
+            try context.save()
+        } catch {
+            logger.error("Failed to delete entry: \(error.localizedDescription)")
+            fail("Couldn't delete the painting. Please try again.")
+        }
+    }
+    
+    /// Deletes every entry whose ID is in selectedIDs.
+    /// The ViewModel receives what it needs as parameters — it has no access
+    /// to @Query or @Environment, those belong to the View.
+    /// Resetting isSelecting/selectedEntries is the View's job after this returns.
+    func deleteSelectedEntries(_ selectedIDs: Set<JournalEntry.ID>, from entries: [JournalEntry], context: ModelContext) {
+        entries
+            .filter { selectedIDs.contains($0.id) }
+            .forEach { delete($0, from: context) } // calls the single-entry delete above
+    }
+
     // MARK: - Photo pipeline
 
     /// Loads the picked photo into a `UIImage` so it can be shown while
