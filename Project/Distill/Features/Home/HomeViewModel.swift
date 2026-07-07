@@ -37,6 +37,7 @@ final class HomeViewModel {
         imageStore.deletePainting(identifier: entry.paintingImageIdentifier)
         imageStore.deleteReference(identifier: entry.referenceImageIdentifier)
         context.delete(entry)
+
         do {
             try context.save()
         } catch {
@@ -44,15 +45,19 @@ final class HomeViewModel {
             fail("Couldn't delete the painting. Please try again.")
         }
     }
-    
+
     /// Deletes every entry whose ID is in selectedIDs.
     /// The ViewModel receives what it needs as parameters — it has no access
     /// to @Query or @Environment, those belong to the View.
     /// Resetting isSelecting/selectedEntries is the View's job after this returns.
-    func deleteSelectedEntries(_ selectedIDs: Set<JournalEntry.ID>, from entries: [JournalEntry], context: ModelContext) {
+    func deleteSelectedEntries(
+        _ selectedIDs: Set<JournalEntry.ID>,
+        from entries: [JournalEntry],
+        context: ModelContext
+    ) {
         entries
             .filter { selectedIDs.contains($0.id) }
-            .forEach { delete($0, from: context) } // calls the single-entry delete above
+            .forEach { delete($0, from: context) }
     }
 
     // MARK: - Photo pipeline
@@ -69,7 +74,9 @@ final class HomeViewModel {
                 fail("Couldn't load that photo. Try a different one.")
                 return nil
             }
+
             return originalImage
+
         } catch {
             logger.error("Failed to load photo: \(error.localizedDescription)")
             fail("Couldn't load that photo. Try a different one.")
@@ -77,43 +84,94 @@ final class HomeViewModel {
         }
     }
 
-    /// Turns an already-loaded photo into a saved `JournalEntry`:
-    /// resize → extract colors → generate painting → persist.
-    func process(_ originalImage: UIImage, into context: ModelContext) async {
+    // MARK: - Palette extraction
+
+    /// Resizes an image and extracts its four dominant colors.
+    func extractPalette(from originalImage: UIImage) async throws -> [Color] {
+
+        let targetSize = CGSize(width: 100, height: 100)
+
+        let resizedImage = await Task.detached(priority: .userInitiated) {
+            await originalImage.resize(to: targetSize)
+        }.value
+
+        guard let resizedImage else {
+            throw CocoaError(.coderInvalidValue)
+        }
+
+        let colors = try await extractor.extract(from: resizedImage)
+
+        logger.debug("Extracted \(colors.count) colors")
+
+        return colors
+    }
+
+    // MARK: - Journal creation
+
+    /// Creates and persists a JournalEntry using an already extracted palette.
+    /// This avoids running DominantColors a second time.
+    func createJournalEntry(
+        from originalImage: UIImage,
+        palette: [Color],
+        into context: ModelContext
+    ) async {
+
         do {
-            // Downscale off the main actor so the UI never stalls.
-            let targetSize = CGSize(width: 100, height: 100)
-            let resizedImage = await Task.detached(priority: .userInitiated) {
-                await originalImage.resize(to: targetSize)
-            }.value
 
-            guard let resizedImage else {
-                fail("Failed to process the image.\nPlease try again.")
-                return
-            }
-
-            let colors = try await extractor.extract(from: resizedImage)
-            logger.debug("Extracted \(colors.count) colors")
-
-            let generatedPainting = generator.generate(from: colors)
+            let generatedPainting = generator.generate(from: palette)
 
             let referenceIdentifier = try imageStore.saveReference(originalImage)
+
             let paintingIdentifier = try imageStore.savePainting(generatedPainting)
 
             let entry = JournalEntry(
                 referenceImageIdentifier: referenceIdentifier,
                 paintingImageIdentifier: paintingIdentifier,
-                paletteHex: colors.map(\.hex)
+                paletteHex: palette.map(\.hex)
             )
+
             context.insert(entry)
 
             try context.save()
+
             logger.debug("Journal entry saved successfully.")
 
         } catch {
+
+            logger.error("Failed to save journal entry: \(error.localizedDescription)")
+            fail("Couldn't save your painting.")
+
+        }
+
+    }
+
+    // MARK: - Backwards compatibility
+
+    /// Legacy helper that performs the full pipeline.
+    /// New code should call extractPalette() followed by
+    /// createJournalEntry().
+    func process(
+        _ originalImage: UIImage,
+        into context: ModelContext
+    ) async {
+
+        do {
+
+            let palette = try await extractPalette(from: originalImage)
+
+            await createJournalEntry(
+                from: originalImage,
+                palette: palette,
+                into: context
+            )
+
+        } catch {
+
             logger.error("Color extraction failed: \(error.localizedDescription)")
             fail("Something went wrong. Please try again.")
+
         }
+
     }
 
     // MARK: - Helpers
@@ -122,4 +180,5 @@ final class HomeViewModel {
         errorMessage = message
         isShowingError = true
     }
+
 }

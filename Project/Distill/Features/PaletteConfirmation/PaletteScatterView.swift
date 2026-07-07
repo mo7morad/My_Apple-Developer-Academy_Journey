@@ -1,21 +1,13 @@
-//
-//  PaletteScatterView.swift
-//  distill
-//
-//  Created by Vitha Watson on 07/07/26.
-//
-
-
 import SwiftUI
 
 struct PaletteScatterView: View {
 
     let colors: [Color]
 
-    @State private var transforms: [CardTransform] = []
-
     var body: some View {
         GeometryReader { geometry in
+
+            let transforms = generateTransforms(in: geometry.size)
 
             ZStack {
 
@@ -35,21 +27,17 @@ struct PaletteScatterView: View {
 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onAppear {
-                generateTransforms(in: geometry.size)
-            }
+
         }
         .allowsHitTesting(false)
     }
 
-    private func generateTransforms(in size: CGSize) {
-
-        guard transforms.isEmpty else { return }
+    private func generateTransforms(in size: CGSize) -> [CardTransform] {
 
         let horizontal = min(size.width * 0.34, 250)
         let vertical = min(size.height * 0.27, 185)
 
-        transforms = [
+        return [
 
             CardTransform(
                 offset: CGSize(
