@@ -168,9 +168,9 @@ struct HomeView: View {
                     isSelecting = false
                     selectedEntries = []
                 } label: {
-                    Image(systemName: "checkmark.circle.fill")
+                    Image(systemName: "x.circle")
                 }
-                .accessibilityLabel("Done")
+                .accessibilityLabel("Cancel")
             }
 
             ToolbarSpacer(.fixed, placement: .topBarTrailing)
