@@ -30,6 +30,9 @@ struct HomeView: View {
     @State private var isSelecting: Bool = false
     @State private var selectedEntries: Set<JournalEntry.ID> = []
     @State private var showDeleteConfirmation: Bool = false
+    @State private var showAbout: Bool = false
+    @State private var showNotifications: Bool = false
+    @State private var notificationService = NotificationService()
     
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -102,6 +105,11 @@ struct HomeView: View {
             .sheet(item: $selectedEntry) { entry in
                 CarouselView(entry: entry)
             }
+            .sheet(isPresented: $showNotifications) {
+                NotificationSettingsView(service: notificationService)
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
+            }
             .alert(
                 "Delete \(selectedEntries.count) Painting\(selectedEntries.count == 1 ? "" : "s")?",
                 isPresented: $showDeleteConfirmation
@@ -167,9 +175,9 @@ struct HomeView: View {
                     isSelecting = false
                     selectedEntries = []
                 } label: {
-                    Image(systemName: "checkmark.circle.fill")
+                    Image(systemName: "x.circle")
                 }
-                .accessibilityLabel("Done")
+                .accessibilityLabel("Cancel")
             }
 
             ToolbarSpacer(.fixed, placement: .topBarTrailing)
@@ -209,18 +217,31 @@ struct HomeView: View {
 
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button {
-                    // TODO: Translate
+                    showNotifications = true
                 } label: {
-                    Image(systemName: "translate")
+                    Image(systemName: "bell")
                 }
-                .accessibilityLabel("Translate")
+                .accessibilityLabel("Notifications")
 
                 Button {
-                    // TODO: About Distill
+                    showAbout = true
                 } label: {
                     Image(systemName: "info.circle")
                 }
                 .accessibilityLabel("About Distill")
+                .popover(isPresented: $showAbout) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Distill")
+                            .font(.headline)
+
+                        // TODO: Replace Rania's Design description
+                        Text("Distill helps you capture and revisit your paintings.")
+                            .font(.body)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding()
+                    .presentationCompactAdaptation(.popover) // stays a popover even on iPhone if space allows
+                }
             }
         }
     }
