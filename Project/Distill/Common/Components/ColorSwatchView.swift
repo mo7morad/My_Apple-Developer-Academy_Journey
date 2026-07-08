@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ColorSwatchView: View {
     let color: Color
-    var size: CGFloat = 14
+    var size: CGFloat = 20
 
     var body: some View {
         Circle()

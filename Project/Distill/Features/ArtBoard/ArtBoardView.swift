@@ -17,7 +17,7 @@ struct ArtBoardView: View {
     @State
     private var shareService = ShareService()
 
-    private let canvasPadding: CGFloat = 40
+    private let canvasSize = CGSize(width: 650, height: 650)
 
     init(
         referenceImage: UIImage,
@@ -44,174 +44,164 @@ struct ArtBoardView: View {
 
         @Bindable var viewModel = viewModel
 
-        GeometryReader { geometry in
+        ZStack {
 
-            let size = canvasSize(for: geometry)
+            GridBackgroundView()
 
-            ZStack {
+            PencilCanvasView(
+                drawing: $viewModel.drawing,
+                tool: viewModel.currentPKTool
+            )
+            .frame(width: 650, height: 650)
+            .clipped()
+            .shadow(color:.black.opacity(0.25),radius:4,y:4)
 
-                GridBackgroundView()
+            ReferencePhotoOverlay(
+                referenceImage: referenceImage,
+                isVisible: $viewModel.isReferenceVisible,
+                containerSize: canvasSize
+            )
 
-                PencilCanvasView(
-                    drawing: $viewModel.drawing,
-                    tool: viewModel.currentPKTool
-                )
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 12)
-                )
-                .shadow(color: .black.opacity(0.18), radius: 12, y: 4)
-                .padding(canvasPadding)
+            VStack {
 
-                ReferencePhotoOverlay(
-                    referenceImage: referenceImage,
-                    isVisible: $viewModel.isReferenceVisible,
-                    containerSize: geometry.size
-                )
+                Spacer()
 
-                VStack {
-
-                    Spacer()
-
-                    CanvasToolbar(viewModel: viewModel)
-                        .padding(.bottom, canvasPadding * 0.4)
-
-                }
+                CanvasToolbar(viewModel: viewModel)
+                    .padding(.bottom, 24)
 
             }
-            .navigationTitle("Painting")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden()
-            .toolbar {
 
-                ToolbarItem(placement: .topBarLeading) {
+        }
+        .navigationBarBackButtonHidden()
+
+        .toolbar {
+
+            ToolbarItem(placement: .topBarLeading) {
+
+                Button {
+
+                    finish()
+
+                } label: {
+
+                    Image(systemName: "chevron.left")
+
+                }
+                .accessibilityLabel("Back")
+
+            }
+
+            ToolbarItem(placement: .topBarTrailing) {
+
+                Menu {
 
                     Button {
 
-                        finish(canvasSize: size)
+                        viewModel.toggleReference()
 
                     } label: {
 
-                        Image(systemName: "chevron.left")
+                        Label(
+                            "Toggle Reference",
+                            systemImage: "eye"
+                        )
 
                     }
-                    .accessibilityLabel("Back")
 
-                }
+                    Button {
 
-                ToolbarItem(placement: .topBarTrailing) {
-
-                    Menu {
-
-                        Button {
-
-                            viewModel.toggleReference()
-
-                        } label: {
-                            Label(
-                                "Toggle Reference",
-                                systemImage: "eye"
-                            )
-                        }
-
-                        Button {
-
-                            shareCurrentPainting(canvasSize: size)
-
-                        } label: {
-                            Label(
-                                "Share Painting",
-                                systemImage: "square.and.arrow.up"
-                            )
-                        }
-
-                        Button(role: .destructive) {
-
-                            viewModel.requestReset()
-
-                        } label: {
-                            Label(
-                                "Reset Canvas",
-                                systemImage: "trash"
-                            )
-                        }
+                        shareCurrentPainting()
 
                     } label: {
 
-                        Image(systemName: "ellipsis")
+                        Label(
+                            "Share Painting",
+                            systemImage: "square.and.arrow.up"
+                        )
 
                     }
-                    .accessibilityLabel("More")
+
+                    Button(role: .destructive) {
+
+                        viewModel.requestReset()
+
+                    } label: {
+
+                        Label(
+                            "Reset Canvas",
+                            systemImage: "trash"
+                        )
+
+                    }
+
+                } label: {
+
+                    Image(systemName: "ellipsis")
 
                 }
+                .accessibilityLabel("More")
 
-            }
-            .alert(
-                "Reset Canvas?",
-                isPresented: $viewModel.showResetConfirmation
-            ) {
-
-                Button("Cancel", role: .cancel) { }
-
-                Button("Reset", role: .destructive) {
-                    viewModel.resetCanvas()
-                }
-
-            } message: {
-                Text("This can't be undone.")
-            }
-            .alert(
-                "Something went wrong",
-                isPresented: $viewModel.isShowingError,
-                presenting: viewModel.errorMessage
-            ) { _ in
-                Button("OK") { }
-            } message: { message in
-                Text(message)
-            }
-            .sheet(isPresented: $shareService.isShowingShareSheet) {
-                ShareSheet(items: shareService.itemsToShare)
             }
 
         }
 
-    }
+        .alert(
+            "Reset Canvas?",
+            isPresented: $viewModel.showResetConfirmation
+        ) {
 
-    // MARK: - Helpers
+            Button("Cancel", role: .cancel) { }
 
-    private func canvasSize(for geometry: GeometryProxy) -> CGSize {
+            Button("Reset", role: .destructive) {
+                viewModel.resetCanvas()
+            }
 
-        CGSize(
-            width: max(geometry.size.width - canvasPadding * 2, 1),
-            height: max(geometry.size.height - canvasPadding * 2, 1)
-        )
+        } message: {
+
+            Text("This can't be undone.")
+
+        }
+
+        .alert(
+            "Something went wrong",
+            isPresented: $viewModel.isShowingError,
+            presenting: viewModel.errorMessage
+        ) { _ in
+
+            Button("OK") { }
+
+        } message: { message in
+
+            Text(message)
+
+        }
+
+        .sheet(isPresented: $shareService.isShowingShareSheet) {
+
+            ShareSheet(items: shareService.itemsToShare)
+
+        }
 
     }
 
     // MARK: - Actions
 
-    private func finish(canvasSize: CGSize) {
+    private func finish() {
 
-        if viewModel.existingEntry == nil {
-
-            if viewModel.drawing.strokes.isEmpty {
-                onFinish()
-            } else if viewModel.save(into: modelContext, canvasSize: canvasSize) {
-                onFinish()
-            }
-
-        } else {
-
-            if viewModel.save(into: modelContext, canvasSize: canvasSize) {
-                onFinish()
-            }
-
+        if viewModel.save(
+            into: modelContext,
+            canvasSize: canvasSize
+        ) {
+            onFinish()
         }
 
     }
+    
+    private func shareCurrentPainting() {
 
-    private func shareCurrentPainting(canvasSize: CGSize) {
-
-        let rendered = viewModel.renderPainting(size: canvasSize)
+        let rendered = viewModel.renderPainting(
+            size: canvasSize
+        )
 
         shareService.share(rendered)
 

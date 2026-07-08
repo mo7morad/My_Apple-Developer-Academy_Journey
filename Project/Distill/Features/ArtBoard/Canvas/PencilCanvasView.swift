@@ -1,9 +1,6 @@
 import SwiftUI
 import PencilKit
 
-/// A `UIViewRepresentable` wrapping `PKCanvasView`.
-/// Does **not** show the system `PKToolPicker`, to strictly enforce
-/// the 4-colour locked palette and custom tools.
 struct PencilCanvasView: UIViewRepresentable {
 
     @Binding
@@ -15,48 +12,104 @@ struct PencilCanvasView: UIViewRepresentable {
         Coordinator(drawing: $drawing)
     }
 
-    func makeUIView(context: Context) -> PKCanvasView {
+    func makeUIView(context: Context) -> UIScrollView {
 
-        let canvasView = PKCanvasView()
+        let scrollView = UIScrollView()
 
-        canvasView.drawingPolicy = .anyInput
-        canvasView.backgroundColor = .white
-        canvasView.isOpaque = true
-        canvasView.drawing = drawing
-        canvasView.tool = tool
-        canvasView.delegate = context.coordinator
+        scrollView.minimumZoomScale = 0.5
+        scrollView.maximumZoomScale = 5.0
+        scrollView.zoomScale = 1.0
 
-        return canvasView
+        scrollView.bouncesZoom = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.delegate = context.coordinator
 
+        let canvas = PKCanvasView()
+
+        canvas.translatesAutoresizingMaskIntoConstraints = false
+
+        canvas.backgroundColor = .white
+        canvas.isOpaque = true
+
+        canvas.drawing = drawing
+        canvas.tool = tool
+        canvas.delegate = context.coordinator
+
+        canvas.drawingPolicy = .pencilOnly
+
+        canvas.alwaysBounceVertical = false
+        canvas.alwaysBounceHorizontal = false
+
+        scrollView.addSubview(canvas)
+
+        NSLayoutConstraint.activate([
+
+            canvas.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            canvas.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            canvas.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            canvas.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+
+            canvas.widthAnchor.constraint(equalToConstant: 650),
+            canvas.heightAnchor.constraint(equalToConstant: 650)
+
+        ])
+
+        context.coordinator.canvasView = canvas
+
+        return scrollView
     }
 
-    func updateUIView(_ uiView: PKCanvasView, context: Context) {
+    func updateUIView(
+        _ scrollView: UIScrollView,
+        context: Context
+    ) {
 
-        // Only update if it wasn't triggered by the delegate itself
-        // (prevents weird feedback loops when drawing fast).
-        if uiView.drawing != drawing, !context.coordinator.isUpdatingFromDelegate {
-            uiView.drawing = drawing
+        guard let canvas = context.coordinator.canvasView else {
+            return
         }
 
-        uiView.tool = tool
+        if canvas.drawing != drawing &&
+            !context.coordinator.isUpdatingFromDelegate {
 
+            canvas.drawing = drawing
+        }
+
+        canvas.tool = tool
     }
 
-    // MARK: - Coordinator
-
-    final class Coordinator: NSObject, PKCanvasViewDelegate {
+    final class Coordinator: NSObject,
+                             UIScrollViewDelegate,
+                             PKCanvasViewDelegate {
 
         var drawing: Binding<PKDrawing>
+
+        weak var canvasView: PKCanvasView?
+
         var isUpdatingFromDelegate = false
 
         init(drawing: Binding<PKDrawing>) {
             self.drawing = drawing
         }
 
-        func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
+        func viewForZooming(
+            in scrollView: UIScrollView
+        ) -> UIView? {
+
+            canvasView
+
+        }
+
+        func canvasViewDrawingDidChange(
+            _ canvasView: PKCanvasView
+        ) {
+
             isUpdatingFromDelegate = true
+
             drawing.wrappedValue = canvasView.drawing
+
             isUpdatingFromDelegate = false
+
         }
 
     }

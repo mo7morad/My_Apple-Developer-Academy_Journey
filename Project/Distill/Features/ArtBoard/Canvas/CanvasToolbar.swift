@@ -1,95 +1,92 @@
 import SwiftUI
 
-/// A floating pill showing the locked palette colours, SF Symbol tools, and thickness controls.
+/// Floating liquid-glass toolbar for painting tools and palette selection.
 struct CanvasToolbar: View {
 
     let viewModel: ArtBoardViewModel
 
     @State private var showThicknessPopover = false
+    @State private var offset: CGSize = .zero
+    @GestureState private var dragTranslation: CGSize = .zero
 
     var body: some View {
 
-        HStack(spacing: 12) {
+        HStack(spacing: 18) {
 
             // MARK: - Tools
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(ArtBoardViewModel.CanvasTool.allCases) { tool in
-                        
-                        Button {
-                            if viewModel.selectedTool == tool {
-                                showThicknessPopover.toggle()
-                            } else {
-                                viewModel.selectTool(tool)
-                                showThicknessPopover = false
-                            }
-                        } label: {
-                            Image(systemName: tool.iconName)
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundStyle(viewModel.selectedTool == tool ? .primary : .secondary)
-                                .frame(width: 44, height: 44)
-                                .background {
-                                    if viewModel.selectedTool == tool {
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color(.systemGray4).opacity(0.5))
-                                    }
-                                }
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(tool.label)
-                        .popover(isPresented: Binding(
-                            get: { showThicknessPopover && viewModel.selectedTool == tool },
-                            set: { showThicknessPopover = $0 }
-                        )) {
-                            ThicknessPickerPopover(viewModel: viewModel)
-                                .presentationCompactAdaptation(.popover)
-                        }
-                        
-                    }
-                }
-                .padding(.horizontal, 4)
-            }
-            // Constrain width so it doesn't take up the whole screen on iPad
-            .frame(maxWidth: 320)
-            
-            Divider()
-                .frame(height: 30)
-            
-            // MARK: - Colours
 
             HStack(spacing: 8) {
+
+                ForEach(ArtBoardViewModel.CanvasTool.allCases) { tool in
+
+                    Button {
+                        if viewModel.selectedTool == tool {
+                            showThicknessPopover.toggle()
+                        } else {
+                            viewModel.selectTool(tool)
+                            showThicknessPopover = false
+                        }
+                    } label: {
+                        Image(systemName: tool.iconName)
+                            .symbolVariant(
+                                viewModel.selectedTool == tool ? .fill : .none
+                            )
+                            .font(
+                                .system(
+                                    size: 22,
+                                    weight: .medium
+                                )
+                            )
+                            .foregroundStyle(
+                                viewModel.selectedTool == tool ? .primary : .secondary
+                            )
+                            .scaleEffect(viewModel.selectedTool == tool ? 1.22 : 1.0)
+                            .frame(width: 52, height: 52)
+                            .contentShape(Rectangle())
+                            .animation(.snappy(duration: 0.18), value: viewModel.selectedTool)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(tool.label)
+                    .popover(
+                        isPresented: Binding(
+                            get: { showThicknessPopover && viewModel.selectedTool == tool },
+                            set: { showThicknessPopover = $0 }
+                        )
+                    ) {
+                        ThicknessPickerPopover(viewModel: viewModel)
+                            .presentationCompactAdaptation(.popover)
+                    }
+
+                }
+
+            }
+
+            Divider()
+                .frame(height: 34)
+
+            // MARK: - Colours
+
+            HStack(spacing: 10) {
 
                 ForEach(Array(viewModel.palette.enumerated()), id: \.offset) { index, color in
 
                     Button {
-
-                        viewModel.selectColor(color)
-
+                        withAnimation(.snappy(duration: 0.15)) {
+                            viewModel.selectColor(color)
+                        }
                     } label: {
-
                         Circle()
                             .fill(color)
-                            .frame(width: 30, height: 30)
-                            .overlay {
-
-                                if viewModel.selectedColor == color {
-
-                                    Circle()
-                                        .stroke(.white, lineWidth: 3)
-                                        .frame(width: 32, height: 32)
-
-                                }
-
-                            }
+                            .frame(
+                                width: viewModel.selectedColor == color ? 30 : 20,
+                                height: viewModel.selectedColor == color ? 30 : 20
+                            )
                             .shadow(
-                                color: .black.opacity(
-                                    viewModel.selectedColor == color ? 0.3 : 0.12
-                                ),
-                                radius: 3,
+                                color: .black.opacity(0.14),
+                                radius: 2,
                                 y: 1
                             )
-
+                            .animation(.snappy(duration: 0.15), value: viewModel.selectedColor)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Colour \(index + 1)")
@@ -97,40 +94,60 @@ struct CanvasToolbar: View {
                 }
 
             }
-            .padding(.trailing, 4)
+
         }
-        .padding(10)
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(.regularMaterial)
+        .padding(.horizontal, 22)
+        .padding(.vertical, 14)
+        .frame(height: 70)
+        .glassEffect(in: .rect(cornerRadius: 34))
+        .offset(
+            x: offset.width + dragTranslation.width,
+            y: offset.height + dragTranslation.height
         )
-        .shadow(color: .black.opacity(0.12), radius: 8, y: 2)
+        .gesture(
+            DragGesture()
+                .updating($dragTranslation) { value, state, _ in
+                    state = value.translation
+                }
+                .onEnded { value in
+                    offset.width += value.translation.width
+                    offset.height += value.translation.height
+                }
+        )
 
     }
 
 }
 
 struct ThicknessPickerPopover: View {
+
     @Bindable var viewModel: ArtBoardViewModel
-    
+
     var body: some View {
-        HStack(spacing: 16) {
-            // Preview Circle
+
+        HStack(spacing: 20) {
+
             Circle()
-                .fill(Color.primary)
+                .fill(.primary)
                 .frame(
-                    width: 6 + (viewModel.selectedThicknessScalar * 24),
-                    height: 6 + (viewModel.selectedThicknessScalar * 24)
+                    width: 8 + (viewModel.selectedThicknessScalar * 30),
+                    height: 8 + (viewModel.selectedThicknessScalar * 30)
                 )
-                .frame(width: 30, height: 30) // Fixed container to avoid layout shift
-            
-            Slider(value: $viewModel.selectedThicknessScalar, in: 0...1)
-                .frame(width: 140)
-                .tint(.primary)
+                .frame(width: 40, height: 40)
+
+            Slider(
+                value: $viewModel.selectedThicknessScalar,
+                in: 0...1
+            )
+            .frame(width: 180)
+            .tint(.primary)
+
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 16)
+        .padding(.horizontal, 24)
+        .padding(.vertical, 20)
+
     }
+
 }
 
 #Preview {
@@ -145,8 +162,10 @@ struct ThicknessPickerPopover: View {
         ]
     )
 
-    CanvasToolbar(viewModel: vm)
-        .padding()
-        .background(Color(.systemGray5))
+    ZStack {
+        Color(.systemGray5)
+        CanvasToolbar(viewModel: vm)
+            .padding()
+    }
 
 }
