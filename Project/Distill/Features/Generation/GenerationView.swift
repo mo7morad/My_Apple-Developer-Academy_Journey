@@ -25,9 +25,6 @@ struct GenerationView: View {
     @Environment(\.dismiss)
     private var dismiss
 
-    @Environment(\.modelContext)
-    private var modelContext
-
     @Environment(\.accessibilityReduceMotion)
     private var reduceMotion
 
@@ -39,6 +36,12 @@ struct GenerationView: View {
 
     @State
     private var isPulsing = false
+
+    @State
+    private var showPaletteConfirmation = false
+
+    @State
+    private var showArtBoard = false
 
     @State
     private var showPhotoPicker = false
@@ -68,32 +71,10 @@ struct GenerationView: View {
 
                 ZStack {
 
-                    Color(.systemGray3)
-                        .ignoresSafeArea()
-
-                    Image(uiImage: currentImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: 560, maxHeight: 460)
-                        .overlay {
-                            Color.black.opacity(0.35)
-                        }
-                        .overlay {
-                            Text("Distilling Moment…")
-                                .font(.headline)
-                                .foregroundStyle(.white)
-                                .opacity(isPulsing ? 0.5 : 1)
-                        }
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 24)
-                        )
-
-                }
-                .navigationTitle("Today's Moment")
-                .navigationBarTitleDisplayMode(.inline)
-                .interactiveDismissDisabled()
-
-            case .confirmation:
+            }
+            .navigationTitle("Today's Moment")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $showPaletteConfirmation) {
 
                 PaletteConfirmationView(
                     referenceImage: currentImage,
@@ -103,20 +84,18 @@ struct GenerationView: View {
                     },
                     onStartPainting: {
 
-                        Task {
+                        showArtBoard = true
 
-                            await viewModel.createJournalEntry(
-                                from: currentImage,
-                                palette: extractedColors,
-                                into: modelContext
-                            )
+                    }
+                )
 
-                            dismiss()
+            }
+            .navigationDestination(isPresented: $showArtBoard) {
 
-                        }
-
-                    },
-                    onCancel: {
+                ArtBoardView(
+                    referenceImage: currentImage,
+                    palette: extractedColors,
+                    onFinish: {
                         dismiss()
                     }
                 )
@@ -124,6 +103,7 @@ struct GenerationView: View {
             }
 
         }
+        .interactiveDismissDisabled()
         .photosPicker(
             isPresented: $showPhotoPicker,
             selection: $selectedPhotoItem,
@@ -147,6 +127,8 @@ struct GenerationView: View {
                     extractedColors = []
 
                     phase = .loading
+
+                    showArtBoard = false
 
                     hasStarted = false
 

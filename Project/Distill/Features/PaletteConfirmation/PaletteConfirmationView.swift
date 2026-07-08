@@ -16,13 +16,21 @@ struct PaletteConfirmationView: View {
 
             ZStack {
 
-                GridBackgroundView()
+            VStack(spacing: 0) {
 
-                VStack(spacing: 0) {
+                Spacer()
+                    .frame(height: 30)
 
                     Spacer()
 
-                    ZStack {
+                    Image(uiImage: referenceImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 800)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 24)
+                        )
+                        .shadow(radius: 12)
 
                         Image(uiImage: referenceImage)
                             .resizable()
@@ -44,13 +52,14 @@ struct PaletteConfirmationView: View {
                     Spacer()
                         .frame(height:50)
 
-                    HStack(spacing: 14) {
+                Spacer()
+                    .frame(height: 36)
 
-                        Button {
+                HStack(spacing: 14) {
 
-                            onChangeMoment()
+                    Button {
 
-                        } label: {
+                        onChangeMoment()
 
                             Label(
                                 "Change Moment",
@@ -64,11 +73,15 @@ struct PaletteConfirmationView: View {
                         .foregroundStyle(.primary)
                         .controlSize(.large)
 
-                        Button {
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color(.systemBackground))
+                    .foregroundStyle(.primary)
+                    .controlSize(.large)
 
-                            onStartPainting()
+                    Button {
 
-                        } label: {
+                        onStartPainting()
 
                             Label(
                                 "Start Painting",
@@ -82,18 +95,22 @@ struct PaletteConfirmationView: View {
                         .controlSize(.large)
 
                     }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.black)
+                    .foregroundStyle(.white)
+                    .controlSize(.large)
 
                     Spacer()
                         .frame(height:10)
 
-                    Text("Once you start painting, the chosen moment can't be changed.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+                Spacer()
+                    .frame(height: 10)
 
-                    Spacer()
+                Text("Once you start painting, the chosen moment can't be changed.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
 
-                }
-                .padding(.horizontal, 50)
+                Spacer()
 
             }
             .navigationTitle("Today's Distillation")
@@ -109,6 +126,9 @@ struct PaletteConfirmationView: View {
                 }
             }
         }
+        .navigationTitle("Today's Distillation")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
 
 }
 
