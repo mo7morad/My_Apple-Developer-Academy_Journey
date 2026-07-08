@@ -49,6 +49,14 @@ struct GenerationView: View {
     @State
     private var selectedPhotoItem: PhotosPickerItem?
 
+    @State
+    private var phase: Phase = .loading
+
+    private enum Phase {
+        case loading
+        case confirmation
+    }
+
     private let minimumDuration: Duration = .milliseconds(
         Int.random(in: 1500...3500)
     )
@@ -57,27 +65,11 @@ struct GenerationView: View {
 
         NavigationStack {
 
-            ZStack {
+            switch phase {
 
-                Color(.systemGray3)
-                    .ignoresSafeArea()
+            case .loading:
 
-                Image(uiImage: currentImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxWidth: 560, maxHeight: 460)
-                    .overlay {
-                        Color.black.opacity(0.35)
-                    }
-                    .overlay {
-                        Text("Distilling Moment…")
-                            .font(.headline)
-                            .foregroundStyle(.white)
-                            .opacity(isPulsing ? 0.5 : 1)
-                    }
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 24)
-                    )
+                ZStack {
 
             }
             .navigationTitle("Today's Moment")
@@ -117,6 +109,7 @@ struct GenerationView: View {
             selection: $selectedPhotoItem,
             matching: .images
         )
+        .photosPickerDisabledCapabilities(.collectionNavigation)
         .onChange(of: selectedPhotoItem) { _, newItem in
 
             guard let newItem else { return }
@@ -133,7 +126,7 @@ struct GenerationView: View {
 
                     extractedColors = []
 
-                    showPaletteConfirmation = false
+                    phase = .loading
 
                     showArtBoard = false
 
@@ -197,7 +190,7 @@ struct GenerationView: View {
                 )
             }
 
-            showPaletteConfirmation = true
+            phase = .confirmation
 
         } catch {
 

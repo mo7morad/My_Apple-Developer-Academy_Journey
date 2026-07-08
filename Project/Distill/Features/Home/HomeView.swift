@@ -45,8 +45,11 @@ struct HomeView: View {
 
                     // MARK: - Header
 
-                    Button("Start Painting") {
+                    Button {
                         showPhotoPicker = true
+                    } label: {
+                        Label("Start Painting", systemImage: "sparkles")
+                            .frame(width: 280)
                     }
                     .font(.title3.weight(.medium))
                     .buttonStyle(.borderedProminent)
@@ -114,7 +117,7 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showNotifications) {
                 NotificationSettingsView(service: notificationService)
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
             }
             .alert(
@@ -174,22 +177,22 @@ struct HomeView: View {
     private var toolbarContent: some ToolbarContent {
         if isSelecting {
 
-            // MARK: Selection mode toolbar
-
-            // "Done" exits selection mode and clears any selections.
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     isSelecting = false
-                    selectedEntries = []
+                    selectedEntries.removeAll()
                 } label: {
-                    Image(systemName: "x.circle")
+                    Image(systemName: "checkmark")
                 }
-                .accessibilityLabel("Cancel")
+                .accessibilityLabel("Done")
+                .buttonStyle(.borderedProminent)
+                .tint(.black)
+                .foregroundStyle(.white)
+                .controlSize(.large)
             }
 
-            ToolbarSpacer(.fixed, placement: .topBarTrailing)
-
             ToolbarItemGroup(placement: .topBarTrailing) {
+
                 Button {
                     // TODO: Share selected entries
                 } label: {
@@ -198,15 +201,13 @@ struct HomeView: View {
                 .accessibilityLabel("Share")
 
                 Button(role: .destructive) {
-                    // Don't delete immediately — show a confirmation alert first.
-                    // This is Apple's standard destructive action pattern.
                     showDeleteConfirmation = true
                 } label: {
                     Image(systemName: "trash")
                 }
                 .accessibilityLabel("Delete")
-                // Disabled when nothing is selected — no point confirming an empty action.
                 .disabled(selectedEntries.isEmpty)
+
             }
 
         } else {
@@ -236,18 +237,10 @@ struct HomeView: View {
                     Image(systemName: "info.circle")
                 }
                 .accessibilityLabel("About Distill")
-                .popover(isPresented: $showAbout) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Distill")
-                            .font(.headline)
-
-                        // TODO: Replace Rania's Design description
-                        Text("Distill helps you capture and revisit your paintings.")
-                            .font(.body)
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding()
-                    .presentationCompactAdaptation(.popover) // stays a popover even on iPhone if space allows
+                .sheet(isPresented: $showAbout) {
+                    InfoPageView()
+                        .presentationDetents([.large])
+                        .presentationDragIndicator(.visible)
                 }
             }
         }

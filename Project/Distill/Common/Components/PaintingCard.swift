@@ -16,10 +16,12 @@ struct PaintingCard: View {
                 .frame(width: 150, height: 150)
                 .clipShape(RoundedRectangle(cornerRadius: 18))
                 .contentShape(RoundedRectangle(cornerRadius: 18))
-                // Border around the painting image (blue when selected, primary when not).
+                // Black border appears on the card when it is selected.
                 .overlay {
-                    RoundedRectangle(cornerRadius: 18)
-                        .strokeBorder(isSelected ? Color.blue : Color.primary, lineWidth: isSelected ? 3 : 2)
+                    if isSelected {
+                        RoundedRectangle(cornerRadius: 18)
+                            .strokeBorder(.black, lineWidth: 3)
+                    }
                 }
                 // Circle indicator in the top-right corner.
                 // Empty ring = in selection mode but not yet picked.
@@ -28,7 +30,7 @@ struct PaintingCard: View {
                     if isSelecting {
                         Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                             .font(.title3)
-                            .foregroundStyle(isSelected ? .blue : .white)
+                            .foregroundStyle(isSelected ? .black : .white)
                             .shadow(color: .black.opacity(0.3), radius: 2)
                             .padding(6)
                     }

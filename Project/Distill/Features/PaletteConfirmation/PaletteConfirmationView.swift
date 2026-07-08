@@ -1,25 +1,27 @@
 import SwiftUI
 
 struct PaletteConfirmationView: View {
+    
+    @Environment(\.dismiss)
+    private var dismiss
 
     let referenceImage: UIImage
     let colors: [Color]
 
     let onChangeMoment: () -> Void
     let onStartPainting: () -> Void
+    let onCancel: () -> Void
     
     var body: some View {
 
-        ZStack {
-
-            GridBackgroundView()
+            ZStack {
 
             VStack(spacing: 0) {
 
                 Spacer()
                     .frame(height: 30)
 
-                ZStack {
+                    Spacer()
 
                     Image(uiImage: referenceImage)
                         .resizable()
@@ -30,11 +32,25 @@ struct PaletteConfirmationView: View {
                         )
                         .shadow(radius: 12)
 
-                    PaletteScatterView(colors: colors)
+                        Image(uiImage: referenceImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: 650, maxHeight:520)
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 24)
+                            )
+                            .shadow(radius: 12)
 
-                }
-                .frame(maxWidth: 900)
-                .frame(height: 620)
+                        PaletteScatterView(
+                            colors: colors,
+                            imageSize: referenceImage.size
+                        )
+
+                    }
+                    .frame(maxWidth: 750, maxHeight:500)
+
+                    Spacer()
+                        .frame(height:50)
 
                 Spacer()
                     .frame(height: 36)
@@ -45,12 +61,17 @@ struct PaletteConfirmationView: View {
 
                         onChangeMoment()
 
-                    } label: {
+                            Label(
+                                "Change Moment",
+                                systemImage: "arrow.counterclockwise"
+                            )
+                            .frame(width: 280)
 
-                        Label(
-                            "Change Moment",
-                            systemImage: "arrow.counterclockwise"
-                        )
+                        }
+                        .buttonStyle(.glass)
+                        .tint(Color(.systemBackground))
+                        .foregroundStyle(.primary)
+                        .controlSize(.large)
 
                     }
                     .buttonStyle(.borderedProminent)
@@ -62,12 +83,16 @@ struct PaletteConfirmationView: View {
 
                         onStartPainting()
 
-                    } label: {
+                            Label(
+                                "Start Painting",
+                                systemImage: "paintbrush"
+                            )
+                            .frame(width: 280)
 
-                        Label(
-                            "Start Painting",
-                            systemImage: "paintbrush"
-                        )
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.black)
+                        .controlSize(.large)
 
                     }
                     .buttonStyle(.borderedProminent)
@@ -75,7 +100,8 @@ struct PaletteConfirmationView: View {
                     .foregroundStyle(.white)
                     .controlSize(.large)
 
-                }
+                    Spacer()
+                        .frame(height:10)
 
                 Spacer()
                     .frame(height: 10)
@@ -87,14 +113,22 @@ struct PaletteConfirmationView: View {
                 Spacer()
 
             }
-            .padding(.horizontal, 50)
-
+            .navigationTitle("Today's Distillation")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        onCancel()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                    }
+                }
+            }
         }
         .navigationTitle("Today's Distillation")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-
-    }
 
 }
 
@@ -109,7 +143,8 @@ struct PaletteConfirmationView: View {
             Color(hex: "#6C8CBD")
         ],
         onChangeMoment: {},
-        onStartPainting: {}
+        onStartPainting: {},
+        onCancel: {}
     )
 
 }
