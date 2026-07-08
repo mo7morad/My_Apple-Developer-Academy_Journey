@@ -31,6 +31,7 @@ struct NotificationSettingsView: View {
                 Section {
                     Toggle(isOn: reminderEnabledBinding) {
                         Label("End-of-day Nudge", systemImage: "clock.badge.exclamationmark")
+                            .foregroundStyle(.primary)
                     }
 
                     if service.reminderEnabled {
@@ -54,6 +55,7 @@ struct NotificationSettingsView: View {
                 Section {
                     Toggle(isOn: nudgeEnabledBinding) {
                         Label("Painting Nudge", systemImage: "paintbrush")
+                            .foregroundStyle(.primary)
                     }
 
                     if service.nudgeEnabled {
