@@ -116,6 +116,7 @@ struct GenerationView: View {
             selection: $selectedPhotoItem,
             matching: .images
         )
+        .photosPickerDisabledCapabilities(.collectionNavigation)
         .onChange(of: selectedPhotoItem) { _, newItem in
 
             guard let newItem else { return }
