@@ -169,9 +169,7 @@ struct ArtBoardView: View {
                 Text(message)
             }
             .sheet(isPresented: $shareService.isShowingShareSheet) {
-                if let image = shareService.imageToShare {
-                    ShareSheet(items: [image])
-                }
+                ShareSheet(items: shareService.itemsToShare)
             }
 
         }

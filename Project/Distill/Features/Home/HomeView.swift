@@ -35,6 +35,7 @@ struct HomeView: View {
     @State private var showAbout: Bool = false
     @State private var showNotifications: Bool = false
     @State private var notificationService = NotificationService()
+    @State private var shareService = ShareService()
     
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -123,6 +124,9 @@ struct HomeView: View {
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
             }
+            .sheet(isPresented: $shareService.isShowingShareSheet) {
+                ShareSheet(items: shareService.itemsToShare)
+            }
             .alert(
                 "Delete \(selectedEntries.count) Painting\(selectedEntries.count == 1 ? "" : "s")?",
                 isPresented: $showDeleteConfirmation
@@ -197,11 +201,26 @@ struct HomeView: View {
             ToolbarItemGroup(placement: .topBarTrailing) {
 
                 Button {
-                    // TODO: Share selected entries
+
+                    let images = journalEntries
+                        .filter { selectedEntries.contains($0.id) }
+                        .compactMap {
+                            viewModel.loadPainting(
+                                identifier: $0.paintingImageIdentifier
+                            )
+                        }
+
+                    guard !images.isEmpty else { return }
+
+                    shareService.share(images)
+
                 } label: {
+
                     Image(systemName: "square.and.arrow.up")
+
                 }
                 .accessibilityLabel("Share")
+                .disabled(selectedEntries.isEmpty)
 
                 Button(role: .destructive) {
                     showDeleteConfirmation = true

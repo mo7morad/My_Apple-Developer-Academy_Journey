@@ -3,13 +3,20 @@ import SwiftUI
 @Observable
 final class ShareService {
 
-    var imageToShare: UIImage?
+    var itemsToShare: [Any] = []
 
     var isShowingShareSheet = false
 
     func share(_ image: UIImage) {
 
-        imageToShare = image
+        itemsToShare = [image]
+        isShowingShareSheet = true
+
+    }
+
+    func share(_ images: [UIImage]) {
+
+        itemsToShare = images
         isShowingShareSheet = true
 
     }

@@ -18,6 +18,7 @@ struct CarouselView: View {
     @State private var viewModel = CarouselViewModel()
     @State private var showDeleteAlert = false
     @State private var showingReference = false
+    @State private var shareService = ShareService()
 
     var body: some View {
 
@@ -71,6 +72,13 @@ struct CarouselView: View {
 
                         Button {
 
+                            if let image = viewModel.displayedImage(
+                                for: entry,
+                                showingReference: showingReference
+                            ) {
+                                shareService.share(image)
+                            }
+
                         } label: {
                             Label("Share Painting", systemImage: "square.and.arrow.up")
                         }
@@ -120,6 +128,9 @@ struct CarouselView: View {
 
                 Text("This can't be undone.")
 
+            }
+            .sheet(isPresented: $shareService.isShowingShareSheet) {
+                ShareSheet(items: shareService.itemsToShare)
             }
 
         }
