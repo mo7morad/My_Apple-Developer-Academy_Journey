@@ -102,30 +102,30 @@ final class ArtBoardViewModel {
 
         switch selectedTool {
         case .pen:
-            let width = 2 + scalar * 16
+            let width = 2 + scalar * 40
             return PKInkingTool(.pen, color: uiColor, width: width)
         case .marker:
-            let width = 8 + scalar * 28
+            let width = 8 + scalar * 60
             return PKInkingTool(.marker, color: uiColor, width: width)
         case .pencil:
-            let width = 1 + scalar * 13
+            let width = 1 + scalar * 30
             return PKInkingTool(.pencil, color: uiColor, width: width)
         case .watercolor:
-            let width = 10 + scalar * 50
+            let width = 10 + scalar * 100
             if #available(iOS 17.0, *) {
                 return PKInkingTool(.watercolor, color: uiColor, width: width)
             } else {
                 return PKInkingTool(.marker, color: uiColor, width: width)
             }
         case .crayon:
-            let width = 4 + scalar * 20
+            let width = 4 + scalar * 50
             if #available(iOS 17.0, *) {
                 return PKInkingTool(.crayon, color: uiColor, width: width)
             } else {
                 return PKInkingTool(.pencil, color: uiColor, width: width)
             }
         case .monoline:
-            let width = 2 + scalar * 18
+            let width = 2 + scalar * 45
             if #available(iOS 17.0, *) {
                 return PKInkingTool(.monoline, color: uiColor, width: width)
             } else {

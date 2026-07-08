@@ -49,14 +49,6 @@ struct GenerationView: View {
     @State
     private var selectedPhotoItem: PhotosPickerItem?
 
-    @State
-    private var phase: Phase = .loading
-
-    private enum Phase {
-        case loading
-        case confirmation
-    }
-
     private let minimumDuration: Duration = .milliseconds(
         Int.random(in: 1500...3500)
     )
@@ -64,18 +56,17 @@ struct GenerationView: View {
     var body: some View {
 
         NavigationStack {
-
-            switch phase {
-
-            case .loading:
-
-                ZStack {
-
+            ZStack {
+                Image(uiImage: currentImage)
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .opacity(isPulsing ? 0.6 : 1.0)
+                    .scaleEffect(isPulsing ? 0.95 : 1.0)
             }
             .navigationTitle("Today's Moment")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $showPaletteConfirmation) {
-
                 PaletteConfirmationView(
                     referenceImage: currentImage,
                     colors: extractedColors,
@@ -83,15 +74,14 @@ struct GenerationView: View {
                         showPhotoPicker = true
                     },
                     onStartPainting: {
-
                         showArtBoard = true
-
+                    },
+                    onCancel: {
+                        showPaletteConfirmation = false
                     }
                 )
-
             }
             .navigationDestination(isPresented: $showArtBoard) {
-
                 ArtBoardView(
                     referenceImage: currentImage,
                     palette: extractedColors,
@@ -99,9 +89,7 @@ struct GenerationView: View {
                         dismiss()
                     }
                 )
-
             }
-
         }
         .interactiveDismissDisabled()
         .photosPicker(
@@ -115,52 +103,32 @@ struct GenerationView: View {
             guard let newItem else { return }
 
             Task {
-
                 defer {
                     selectedPhotoItem = nil
                 }
 
                 if let image = await viewModel.loadImage(from: newItem) {
-
                     currentImage = image
-
                     extractedColors = []
-
-                    phase = .loading
-
                     showArtBoard = false
-
                     hasStarted = false
-
                     isPulsing = false
-
                     startPulsing()
-
                     await runGeneration()
-
                 }
-
             }
-
         }
         .onAppear {
-
             guard !hasStarted else { return }
-
             hasStarted = true
-
             startPulsing()
-
             Task {
                 await runGeneration()
             }
-
         }
-
     }
 
     private func startPulsing() {
-
         guard !reduceMotion else { return }
 
         withAnimation(
@@ -169,15 +137,12 @@ struct GenerationView: View {
         ) {
             isPulsing = true
         }
-
     }
 
     private func runGeneration() async {
-
         let start = ContinuousClock.now
 
         do {
-
             extractedColors = try await viewModel.extractPalette(
                 from: currentImage
             )
@@ -190,25 +155,18 @@ struct GenerationView: View {
                 )
             }
 
-            phase = .confirmation
+            showPaletteConfirmation = true
 
         } catch {
-
             viewModel.errorMessage =
                 "Something went wrong. Please try again."
-
             viewModel.isShowingError = true
-
             dismiss()
-
         }
-
     }
-
 }
 
 #Preview {
-
     GenerationView(
         referenceImage: UIImage(systemName: "photo")!,
         viewModel: HomeViewModel()
@@ -217,5 +175,4 @@ struct GenerationView: View {
         for: JournalEntry.self,
         inMemory: true
     )
-
 }
