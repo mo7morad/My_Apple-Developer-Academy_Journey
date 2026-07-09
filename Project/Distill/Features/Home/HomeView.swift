@@ -46,21 +46,25 @@ struct HomeView: View {
 
                     // MARK: - Header
 
-                    Button {
-                        showPhotoPicker = true
-                    } label: {
-                        Label("Start Painting", systemImage: "sparkles")
-                            .frame(width: 280)
-                    }
-                    .font(.title3.weight(.medium))
-                    .buttonStyle(.borderedProminent)
-                    .tint(.primary)
-                    .foregroundStyle(Color(.systemBackground))
-                    .controlSize(.large)
-                    .padding(.top, 20)
+                    if !hasTodaysPainting {
 
-                    Divider()
-                        .padding(.top, Layout.contentPadding)
+                        Button {
+                            showPhotoPicker = true
+                        } label: {
+                            Label("Start Painting", systemImage: "sparkles")
+                                .frame(width: 280)
+                        }
+                        .font(.title3.weight(.medium))
+                        .buttonStyle(.borderedProminent)
+                        .tint(.primary)
+                        .foregroundStyle(Color(.systemBackground))
+                        .controlSize(.large)
+                        .padding(.top, 20)
+
+                        Divider()
+                            .padding(.top, Layout.contentPadding)
+
+                    }
 
                     // MARK: - Previous Painting Grid
 
@@ -146,6 +150,10 @@ struct HomeView: View {
     }
 
     // MARK: - Subviews
+    
+    private var hasTodaysPainting: Bool {
+        journalEntries.contains { $0.isToday }
+    }
 
     private var paintingGrid: some View {
         LazyVGrid(
