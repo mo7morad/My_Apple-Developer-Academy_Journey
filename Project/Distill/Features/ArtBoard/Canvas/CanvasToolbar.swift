@@ -5,22 +5,9 @@ struct CanvasToolbar: View {
 
     let viewModel: ArtBoardViewModel
 
-    @State private var showThicknessPopover = false
-    @State private var dragOffset: CGSize = .zero
-    @State private var basePosition = CGSize(width: 0, height: 0)
-    
-    private var dragBounds: (
-        x: ClosedRange<CGFloat>,
-        y: ClosedRange<CGFloat>
-    ) {
+    @State
+    private var showThicknessPopover = false
 
-        (
-            x: (-520)...520,
-            y: (-320)...320
-        )
-
-    }
-    
     var body: some View {
 
         HStack(spacing: 18) {
@@ -32,13 +19,20 @@ struct CanvasToolbar: View {
                 ForEach(ArtBoardViewModel.CanvasTool.allCases) { tool in
 
                     Button {
+
                         if viewModel.selectedTool == tool {
+
                             showThicknessPopover.toggle()
+
                         } else {
+
                             viewModel.selectTool(tool)
                             showThicknessPopover = false
+
                         }
+
                     } label: {
+
                         Image(systemName: tool.iconName)
                             .symbolVariant(
                                 viewModel.selectedTool == tool ? .fill : .none
@@ -52,21 +46,36 @@ struct CanvasToolbar: View {
                             .foregroundStyle(
                                 viewModel.selectedTool == tool ? .primary : .secondary
                             )
-                            .scaleEffect(viewModel.selectedTool == tool ? 1.22 : 1.0)
+                            .scaleEffect(
+                                viewModel.selectedTool == tool ? 1.22 : 1.0
+                            )
                             .frame(width: 52, height: 52)
                             .contentShape(Rectangle())
-                            .animation(.snappy(duration: 0.18), value: viewModel.selectedTool)
+                            .animation(
+                                .snappy(duration: 0.18),
+                                value: viewModel.selectedTool
+                            )
+
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(tool.label)
                     .popover(
                         isPresented: Binding(
-                            get: { showThicknessPopover && viewModel.selectedTool == tool },
-                            set: { showThicknessPopover = $0 }
+                            get: {
+                                showThicknessPopover &&
+                                viewModel.selectedTool == tool
+                            },
+                            set: {
+                                showThicknessPopover = $0
+                            }
                         )
                     ) {
-                        ThicknessPickerPopover(viewModel: viewModel)
-                            .presentationCompactAdaptation(.popover)
+
+                        ThicknessPickerPopover(
+                            viewModel: viewModel
+                        )
+                        .presentationCompactAdaptation(.popover)
+
                     }
 
                 }
@@ -80,13 +89,19 @@ struct CanvasToolbar: View {
 
             HStack(spacing: 10) {
 
-                ForEach(Array(viewModel.palette.enumerated()), id: \.offset) { index, color in
+                ForEach(
+                    Array(viewModel.palette.enumerated()),
+                    id: \.offset
+                ) { index, color in
 
                     Button {
+
                         withAnimation(.snappy(duration: 0.15)) {
                             viewModel.selectColor(color)
                         }
+
                     } label: {
+
                         Circle()
                             .fill(color)
                             .frame(
@@ -98,7 +113,11 @@ struct CanvasToolbar: View {
                                 radius: 2,
                                 y: 1
                             )
-                            .animation(.snappy(duration: 0.15), value: viewModel.selectedColor)
+                            .animation(
+                                .snappy(duration: 0.15),
+                                value: viewModel.selectedColor
+                            )
+
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Colour \(index + 1)")
@@ -111,35 +130,8 @@ struct CanvasToolbar: View {
         .padding(.horizontal, 22)
         .padding(.vertical, 14)
         .frame(height: 70)
-        .glassEffect(in: .rect(cornerRadius: 34))
-        .offset(
-            x: basePosition.width + dragOffset.width,
-            y: basePosition.height + dragOffset.height
-        )
-        .highPriorityGesture(
-            DragGesture(minimumDistance: 2)
-                .onChanged { value in
-                    dragOffset = value.translation
-                }
-                .onEnded { value in
-                    basePosition.width = min(
-                        max(
-                            basePosition.width + value.translation.width,
-                            dragBounds.x.lowerBound
-                        ),
-                        dragBounds.x.upperBound
-                    )
-
-                    basePosition.height = min(
-                        max(
-                            basePosition.height + value.translation.height,
-                            dragBounds.y.lowerBound
-                        ),
-                        dragBounds.y.upperBound
-                    )
-
-                    dragOffset = .zero
-                }
+        .glassEffect(
+            in: .rect(cornerRadius: 34)
         )
 
     }
@@ -148,7 +140,8 @@ struct CanvasToolbar: View {
 
 struct ThicknessPickerPopover: View {
 
-    @Bindable var viewModel: ArtBoardViewModel
+    @Bindable
+    var viewModel: ArtBoardViewModel
 
     var body: some View {
 
@@ -160,7 +153,10 @@ struct ThicknessPickerPopover: View {
                     width: 8 + (viewModel.selectedThicknessScalar * 30),
                     height: 8 + (viewModel.selectedThicknessScalar * 30)
                 )
-                .frame(width: 40, height: 40)
+                .frame(
+                    width: 40,
+                    height: 40
+                )
 
             Slider(
                 value: $viewModel.selectedThicknessScalar,
@@ -190,9 +186,11 @@ struct ThicknessPickerPopover: View {
     )
 
     ZStack {
+
         Color(.systemGray5)
+
         CanvasToolbar(viewModel: vm)
-            .padding()
+
     }
 
 }
