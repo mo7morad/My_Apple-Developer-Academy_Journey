@@ -1,28 +1,44 @@
+<div align="center">
+
 # Distill - iPadOS Painting & Multimedia 🎨
 
-> Challenge 4 — iStack & iPadOS App
+[![Swift](https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white)](https://developer.apple.com/swift/)
+[![iPadOS](https://img.shields.io/badge/iPadOS-000000?style=flat-square&logo=apple&logoColor=white)](https://developer.apple.com/ipados/)
+[![AVFoundation](https://img.shields.io/badge/AVFoundation-blue?style=flat-square)](https://developer.apple.com/documentation/avfoundation)
+[![PencilKit](https://img.shields.io/badge/PencilKit-orange?style=flat-square)](https://developer.apple.com/documentation/pencilkit)
 
-Distill is an iPadOS application built around multimedia and drawing capabilities using **CoreGraphics** and **PencilKit**, combined with **AVFoundation** for rich media experiences. 
+[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Technical Report](#technical-report-the-exploration-log)
 
-## 🌟 Features
+</div>
+
+## Overview
+
+Distill is an iPadOS application built around multimedia and drawing capabilities using **CoreGraphics** and **PencilKit**, combined with **AVFoundation** for rich media experiences.
+
+This project was developed by a team to explore integrating multiple complex frameworks to deliver an optimized iPadOS application with Apple Pencil support.
+
+## Features
+
 - **Interactive Canvas**: Draw and paint seamlessly using Apple Pencil on iPadOS.
 - **Multimedia Integration**: Incorporates videos and rich media for a holistic experience.
-- **Daily Constraints**: Built-in limits for daily painting sessions to encourage consistent habits (from `feat/limit-painting-for-one-each-day`).
+- **Daily Constraints**: Built-in limits for daily painting sessions to encourage consistent habits (from the `feat/limit-painting-for-one-each-day` branch).
 
-## 🛠️ Tech Stack
-- **iPadOS Framework**: Leveraging the larger screen layout, multitasking, and productive interfaces.
-- **AVFoundation / Multimedia**: For handling video playback and underlying media components.
-- **CoreGraphics & PencilKit**: For high-performance drawing and Apple Pencil support.
+## Getting started
 
-## 🚀 Getting Started
+To run the project locally:
+
 1. Open `Distill.xcodeproj` inside the `Project/` folder in Xcode.
 2. Select an **iPad simulator** (required for the best experience).
 3. Press **⌘ R** to build and run the app.
 
+> [!IMPORTANT]
+> The app is heavily optimized for iPadOS. Running it on an iPhone simulator may cause unexpected layout issues.
+
 ---
 
-## 📄 Technical Report: The Exploration Log
+## Technical Report: The Exploration Log
 
+> [!NOTE]
 > **Before you start:** Fill in Section 1 early. Once you move on to Section 2, don't go back and edit Section 1. The gap between what you guessed and what you actually found is the point of this whole document.
 
 ### Present your team
@@ -38,7 +54,7 @@ Because: It sounded obvious since we chose the multimedia framework.
 We tried to implement the AVPlayer and see how the media plays and how the AVPlayer works.
 
 *What we discovered that we didn't expect:*
-There are so many layers from AVFoundation to play media like video. It is not just about how simple play and pause the video at front, but there are so many events happening in the back there. For instance, video is essentially frames shown fast enough to fool our brain. A single raw frame at 1920X1080 (3 bytes/pixel) has a 6MB size. At 24fps, one minute of raw video = ~8.6 GB! This is why codecs and containers (like .mp4 or .mov) are essential to compress video and hold tracks, timing, and metadata.
+There are so many layers from AVFoundation to play media like video. It is not just about a simple play and pause the video at front, but there are so many events happening in the back there. For instance, video is essentially frames shown fast enough to fool our brain. A single raw frame at 1920X1080 (3 bytes/pixel) has a 6MB size. At 24fps, one minute of raw video = ~8.6 GB! This is why codecs and containers (like .mp4 or .mov) are essential to compress video and hold tracks, timing, and metadata.
 
 ### What We Tried and Dropped
 *We considered:*

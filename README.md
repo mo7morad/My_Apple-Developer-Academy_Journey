@@ -1,109 +1,76 @@
-# <img src="https://img.icons8.com/?size=100&id=30840&format=png&color=808080" width="20" style="vertical-align:middle;" />  Apple Developer Academy — Challenges
+<div align="center">
 
-> My Journey through Apple Developer Academy challenges spanning both **design** and **SwiftUI development**.  
-> Most folders are self-contained Xcode projects.
+<img src="https://img.icons8.com/?size=100&id=30840&format=png&color=808080" alt="Apple Icon" width="64" />
 
----
+# Apple Developer Academy Challenges
 
-## 🗺️ Challenges at a Glance
+[![Swift](https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white)](https://developer.apple.com/swift/)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-blue?style=flat-square&logo=swift)](https://developer.apple.com/xcode/swiftui/)
+
+[Overview](#overview) • [Challenges at a Glance](#challenges-at-a-glance) • [Getting started](#getting-started) • [Repository Structure](#repository-structure)
+
+</div>
+
+## Overview
+
+My journey through Apple Developer Academy challenges spanning both design and SwiftUI development. Most folders are self-contained Xcode projects that demonstrate incremental learning and skill acquisition over the course of the academy.
+
+> [!NOTE]
+> Each challenge folder contains its own detailed `README.md` with a deeper breakdown of the code, concepts, and screenshots.
+
+## Challenges at a Glance
 
 | # | Folder | App Name | Core Concepts |
 |---|---|---|---|
 | 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | PrimeShift (2 Screen App) | `NavigationStack`, `List`, `HStack`, `Image`, assets |
-| 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Individual Design (Sketch) | UI/UX design, Sketch artboards, design-to-dev handoff |
-| 2 | [`AppleAcademy-Ch2-Contacts`](./AppleAcademy-Ch2-Contacts) | Contacts | `Dictionary(grouping:)`, sectioned `List`, toolbar, search |
-| 3 | [`AppleAcademy-Ch3-Nutrition`](./AppleAcademy-Ch03-Nutrition/Ch03%20-%20Gym%20Nutrition) | Numo (Gym Nutrition Tracker) | Modular architecture, SwiftUI, health goals |
-| 4 | [`AppleAcademy-Ch4-iStack`](./AppleAcademy-Ch04-iStack/Distill) | Distill (iPadOS Painting App) | `CoreGraphics`, `PencilKit`, `AVFoundation`, iPadOS UI |
+| 1 | [`AppleAcademy-Ch01-HelpAnAcademyFriend`](./AppleAcademy-Ch01-HelpAnAcademyFriend) | Individual Design (Sketch) | UI/UX design, Sketch artboards, design-to-dev handoff |
+| 2 | [`AppleAcademy-Ch02-ContactsAppRemix`](./AppleAcademy-Ch02-ContactsAppRemix) | Contacts | `Dictionary(grouping:)`, sectioned `List`, toolbar, search |
+| 3 | [`AppleAcademy-Ch03-Nutrition`](./AppleAcademy-Ch03-Nutrition/Ch03%20-%20Gym%20Nutrition) | Numo (Gym Nutrition Tracker) | Modular architecture, SwiftUI, health goals |
+| 4 | [`AppleAcademy-Ch04-iStack`](./AppleAcademy-Ch04-iStack/Distill) | Distill (iPadOS Painting App) | `CoreGraphics`, `PencilKit`, `AVFoundation`, iPadOS UI |
 
----
+## Challenge Summaries
 
-## 📚 Challenge Summaries
+### Challenge 0 — PrimeShift
+The first individual challenge completed. Built to maintain manual motorcycle maintenance checkups and log the learning journey of how to ride a manual motorcycle.
 
-### [Challenge 0 — PrimeShift](./AppleAcademy-Ch0-PrimeShift)
-Was the first challenge I completed this individual challenge. The app was from my choice, and I chose to create this to help me maintain my manual motorcycle maintenance checkups, for each part, also log my learning journey, of how to ride a manual motorcycle.
+### Challenge 1 — Help an Academy Friend
+A team project focused on UI/UX design using Sketch. This challenge taught empathy and user-centered design, resulting in an individual design file with artboards and UI components ready for developer handoff.
 
-**Key views:** `NavigationStack` › `List` › `HStack` › `Image` + `Text`
+### Challenge 2 — Contacts
+A clone and remix of Apple's Contacts app built in two stages: a static version for structure and a dynamic version powered by `Dictionary(grouping:)` for scalability.
 
----
+### Challenge 3 — Numo (Gym Nutrition Tracker)
+An iOS application designed to help gym-goers track their daily nutrition. It emphasizes a clean separation of concerns and robust UI development using a modular SwiftUI architecture.
 
-### [Challenge 1 — Help an Academy Friend](./AppleAcademy-Ch1-HelpAnAcademyFriend)
+### Challenge 4 — Distill (iPadOS Painting & Multimedia)
+An iPadOS application combining CoreGraphics and PencilKit for a responsive canvas, alongside AVFoundation for a rich media experience.
 
-A TEAM project introduction to **UI/UX design** using **Sketch** . This challenge focused on teaching us empathy, and that we are creating for a user that who has specific needs and we need to address them, and help this friend. learning the Sketch design tool — artboards, UI components, typography, spacing, and visual hierarchy — and producing an individual design file that captures one or more app screens.
+## Getting started
 
-**Key skill:** 
-Empathy and user-centered design.
-Wireframing and visual design in Sketch, preparing assets and layouts for developer handoff.
+To explore the challenges locally, follow these steps:
 
----
+> [!IMPORTANT]
+> You need a Mac with Xcode 15+ installed to run the SwiftUI projects.
 
-### [Challenge 2 — Contacts](./AppleAcademy-Ch2-Contacts)
-
-A (DUO) project **clone with a remix of Apple's Contacts app** built in two stages:
-
-1. **Static** (`AcademyVersion.swift`) — hardcoded contacts and sections, built by hand to understand the exact structure.
-2. **Dynamic** (`DictionaryViewVersion.swift`) — the same UI powered by `Dictionary(grouping:)`, making it trivial to add or remove contacts.
-
-**Key concepts:** Alphabetical `Section` lists, scrubber index, native search bar, bottom toolbar, and Swift's `Dictionary(grouping:)` API.
-
----
-
-### [Challenge 3 — Numo (Gym Nutrition Tracker)](./AppleAcademy-Ch03-Nutrition/Ch03%20-%20Gym%20Nutrition)
-
-An iOS application designed to help gym-goers and fitness enthusiasts track their daily nutrition and maintain a healthy lifestyle. This project emphasizes a clean separation of concerns and robust UI development.
-
-**Key concepts:** Modular SwiftUI architecture (App, Core, DesignSystem, Features), health tracking, and custom design components.
-
----
-
-### [Challenge 4 — Distill (iPadOS Painting & Multimedia)](./AppleAcademy-Ch04-iStack/Distill)
-
-A team iPadOS application built around multimedia and drawing capabilities. It combines CoreGraphics and PencilKit for a responsive canvas with AVFoundation to provide a rich media experience.
-
-**Key concepts:** iPadOS specific layouts, `PencilKit` drawing, `AVFoundation` media integration, and system constraints handling.
-
----
-
-## 🚀 Getting Started
-
+1. Clone the repository:
 ```bash
-# 1. Clone the repo
 git clone https://github.com/mo7morad/Apple-Developer-Academy-Challenges.git
+```
 
-# 2. Open any challenge in Xcode
+2. Open any challenge in Xcode:
+```bash
 open AppleAcademy-Ch0-PrimeShift/PrimeShift.xcodeproj
 ```
 
-Then pick an iPhone simulator (or an iPad simulator for Challenge 4) and press **⌘ R**.
+3. Pick a simulator (iPhone or iPad) and press **⌘ R** to run.
 
----
-
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 Apple-Developer-Academy-Challenges/
-├── AppleAcademy-Ch0-PrimeShift/          # Challenge 0
-│   ├── README.md
-│   └── PrimeShift/
-├── AppleAcademy-Ch1-HelpAnAcademyFriend/ # Challenge 1 (Design in Sketch)
-│   ├── README.md
-│   └── My individual Design.sketch
-├── AppleAcademy-Ch2-Contacts/            # Challenge 2
-│   ├── README.md
-│   └── Contacts/
-├── AppleAcademy-Ch03-Nutrition/          # Challenge 3
-│   └── Ch03 - Gym Nutrition/
-│       ├── README.md
-│       └── Numo/
-└── AppleAcademy-Ch04-iStack/             # Challenge 4
-    └── Distill/
-        ├── README.md
-        └── Project/
+├── AppleAcademy-Ch0-PrimeShift/
+├── AppleAcademy-Ch01-HelpAnAcademyFriend/
+├── AppleAcademy-Ch02-ContactsAppRemix/
+├── AppleAcademy-Ch03-Nutrition/
+└── AppleAcademy-Ch04-iStack/
 ```
-
-Each challenge folder contains its own `README.md` with a deeper breakdown of the code, concepts, and screenshots.
-
----
-
-## 👤 Author
-
-**Mohamed Morad** — Apple Developer Academy student  

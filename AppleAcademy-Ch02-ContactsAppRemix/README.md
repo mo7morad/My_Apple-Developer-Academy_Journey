@@ -1,13 +1,53 @@
-# 📇 Challenge 2 — Contacts
+<div align="center">
 
-> **Apple Developer Academy** · Challenge 2  
-> *Clone Apple's Contacts app — first the hard way (static), then the smart way (dynamic with Dictionaries).*
+# Contacts App Remix
 
----
+[![Swift](https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white)](https://developer.apple.com/swift/)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-blue?style=flat-square&logo=swift)](https://developer.apple.com/xcode/swiftui/)
 
-## 📸 Screenshots
+[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Project Structure](#project-structure)
 
-Below are a few screenshots from the running app.
+</div>
+
+## Overview
+
+The **Contacts** challenge reproduces the look and feel of iOS's native Contacts app using SwiftUI. It was built in two distinct stages to teach a crucial lesson: **start simple, then generalize**.
+
+1. **Static (`AcademyVersion.swift`)**: Hardcoded contacts and hardcoded sections — fast to write, but impossible to scale.
+2. **Dynamic (`DictionaryViewVersion.swift`)**: Data-driven grouping via Swift's `Dictionary(grouping:)` — scalable and reusable.
+
+> [!TIP]
+> The dynamic version demonstrates how adding a new contact is as simple as adding a string to an array, automatically managing sections and sorting.
+
+## Features
+
+- **List with Sections**: Building alphabetically sectioned lists.
+- **Section Index**: Incorporating a side scrubber using `.listSectionIndexVisibility(.visible)`.
+- **Native Search Bar**: Added via the `.searchable()` modifier.
+- **Dynamic Grouping**: Grouping an array into a keyed dictionary in one line with `Dictionary(grouping:)`.
+
+## Getting started
+
+To run the project locally:
+
+1. Open `Contacts.xcodeproj` in **Xcode 15+**.
+2. Select any iPhone simulator (e.g. *iPhone 16*).
+3. Press **⌘ R** — the app launches with `StaticContactsView`.
+4. To preview the dynamic version, open `DictionaryViewVersion.swift` and use the **#Preview** canvas.
+
+## Project Structure
+
+```
+AppleAcademy-Ch2-Contacts/
+├── Contacts.xcodeproj/
+└── Contacts/
+    ├── MainApp.swift              # Entry point → shows StaticContactsView
+    ├── AcademyVersion.swift       # Static implementation
+    ├── DictionaryViewVersion.swift# Dynamic implementation
+    └── Assets.xcassets/
+```
+
+## Screenshots
 
 <table>
     <tr>
@@ -21,132 +61,3 @@ Below are a few screenshots from the running app.
         <td></td>
     </tr>
 </table>
-
-## 📖 About
-
-The **Contacts** challenge reproduces the look and feel of iOS's native Contacts app using SwiftUI. It is built in two distinct stages that teach a crucial lesson: **start simple, then generalise**.
-
-| Version | File | Approach |
-|---|---|---|
-| **Static** | `AcademyVersion.swift` | Hardcoded contacts, hardcoded sections — fast to write, impossible to scale |
-| **Dynamic** | `DictionaryViewVersion.swift` | Data-driven grouping via Swift's `Dictionary(grouping:)` — scalable and reusable |
-
----
-
-## 🎯 Learning Objectives
-
-| Concept | What you practice |
-|---|---|
-| `List` with `Section` | Building alphabetically sectioned lists |
-| Section index (scrubber) | `.listSectionIndexVisibility(.visible)` |
-| `.searchable()` | Adding a native search bar to a navigation stack |
-| `Toolbar` / `ToolbarItem` | Placing buttons in the bottom bar |
-| `Dictionary(grouping:)` | Grouping an array into a keyed dictionary in one line |
-| `ForEach` over dictionary keys | Rendering dynamic sections from computed data |
-| `@State` / computed properties | Separating data transformation from the view layer |
-| SwiftUI layout (`ZStack`, `VStack`, `HStack`) | Composing avatar + name rows |
-
----
-
-## 🗂️ Project Structure
-
-```
-AppleAcademy-Ch2-Contacts/
-├── Contacts.xcodeproj/            # Xcode project file
-└── Contacts/
-    ├── MainApp.swift              # @main entry point → shows StaticContactsView
-    ├── AcademyVersion.swift       # Static implementation (hardcoded data)
-    ├── DictionaryViewVersion.swift# Dynamic implementation (Dictionary-powered)
-    └── Assets.xcassets/
-        ├── AppIcon.appiconset/
-        └── AccentColor.colorset/
-```
-
----
-
-
-**Key techniques:**
-- `Circle()` + `ZStack` to create letter avatars
-- `.sectionIndexLabel()` to populate the side scrubber
-- `.listSectionIndexVisibility(.visible)` to always show the index
-- `DefaultToolbarItem(kind: .search, placement: .bottomBar)` for native search placement
-
----
-
-## 📱 Dynamic Version — `DynamicContactsView`
-
-The same UI, but now powered by a real data array. Adding a new contact is a one-line array change — no new sections, no new headers.
-
-```swift
-let allContacts = ["Javier", "Maddie", "Bishal", "Morad",
-                   "lala", "Aka", "Shiro", "Mazitala", "Stamp"]
-```
-
-Swift's `Dictionary(grouping:)` does all the heavy lifting:
-
-```swift
-var groupedContactsDictionary: [String: [String]] {
-    Dictionary(grouping: allContacts) { contact in
-        String(contact.prefix(1)).uppercased()   // key = first letter
-    }
-}
-```
-
-Result at runtime:
-```
-A: ["Aka"]
-B: ["Bishal"]
-J: ["Javier"]
-L: ["lala"]
-M: ["Maddie", "Morad", "Mazitala"]
-S: ["Shiro", "Stamp"]
-```
-
-The view then iterates over `sectionHeaders` (sorted keys) with a `ForEach`, producing fully dynamic alphabetical sections — no manual maintenance required.
-
----
-
-## 🔑 Key Code Snippets
-
-### Avatar circle (Static)
-```swift
-ZStack {
-    Circle()
-        .frame(width: 60, height: 60)
-        .foregroundColor(.gray)
-    Text("CL")   // initials
-}
-```
-
-### Dictionary grouping (Dynamic)
-```swift
-Dictionary(grouping: allContacts) { String($0.prefix(1)).uppercased() }
-```
-
-### Dynamic section rendering
-```swift
-ForEach(sectionHeaders, id: \.self) { header in
-    Section(header: Text(header)) {
-        ForEach(groupedContactsDictionary[header]!.sorted(), id: \.self) { contact in
-            HStack {
-                Image(systemName: "person.fill").foregroundColor(.blue)
-                Text(contact)
-            }
-        }
-    }
-}
-```
-
----
-
-## 🚀 How to Run
-
-1. Open `Contacts.xcodeproj` in **Xcode 15+**
-2. Select any iPhone simulator (e.g. *iPhone 16*)
-3. Press **⌘ R** — the app launches with `StaticContactsView`
-4. To preview the dynamic version, open `DictionaryViewVersion.swift` and use the **#Preview** canvas
-
----
-
-*Apple Developer Academy · Challenge 2*
-

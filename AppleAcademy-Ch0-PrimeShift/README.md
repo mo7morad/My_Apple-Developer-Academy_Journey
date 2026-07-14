@@ -1,30 +1,38 @@
-# Challenge 0 — PrimeShift
+<div align="center">
 
-> Apple Developer Academy · Challenge 0  
-> This was **my** very first app.
+# PrimeShift
 
-## About
+[![Swift](https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white)](https://developer.apple.com/swift/)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-blue?style=flat-square&logo=swift)](https://developer.apple.com/xcode/swiftui/)
 
-PrimeShift is my starter INDIVIDUAL SwiftUI project for Challenge 0.  
-I built it to practice the basics of Xcode and SwiftUI layout.
+[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Project Structure](#project-structure)
 
-This app currently has **one screen** (not two): a simple list inside a `NavigationStack`.
+</div>
 
-## Screenshots
+## Overview
 
-| | | |
-|---|---|---|
-| ![PrimeShift screenshot 1](../Resources/Ch0-PrimeShift1.png) | ![PrimeShift screenshot 2](../Resources/Ch0-PrimeShift2.png) | ![PrimeShift screenshot 3](../Resources/Ch0-PrimeShift3.png) |
+PrimeShift is my starter individual SwiftUI project for Challenge 0 at the Apple Developer Academy. I built it to practice the basics of Xcode and SwiftUI layout, specifically focusing on creating lists and navigation stacks.
 
-## What I built
+This app is designed to help me maintain my manual motorcycle maintenance checkups for each part, and to log my learning journey of how to ride a manual motorcycle.
 
-- A `NavigationStack` with the title **Academy Eats**
-- A `List` containing one row
-- An `HStack` row with:
-  - a local asset image: `biker`
-  - a text label: **An OG Biker**
+> [!NOTE]
+> This was my very first app, and currently has a single screen demonstrating fundamental layout concepts.
 
-## Project structure
+## Features
+
+- **Navigation**: Uses a `NavigationStack` with the title **Academy Eats**
+- **Lists**: Displays a single-row `List` structure
+- **UI Composition**: Employs an `HStack` row combining a local asset image (`biker`) and a text label (**An OG Biker**)
+
+## Getting started
+
+To explore this challenge locally:
+
+1. Open `PrimeShift.xcodeproj` in Xcode.
+2. Choose a simulator (e.g., iPhone 15).
+3. Press **⌘R** to build and run.
+
+## Project Structure
 
 ```text
 AppleAcademy-Ch0-PrimeShift/
@@ -34,23 +42,10 @@ AppleAcademy-Ch0-PrimeShift/
     ├── PrimeShiftApp.swift
     ├── ContentView.swift
     └── Assets.xcassets/
-        ├── AppIcon.appiconset/
-        ├── AccentColor.colorset/
-        └── biker.imageset/
 ```
 
-## Tech used
+## Screenshots
 
-- Swift
-- SwiftUI
-- Xcode project: `PrimeShift.xcodeproj`
-
-## Run it
-
-1. Open `PrimeShift.xcodeproj` in Xcode.
-2. Choose a simulator.
-3. Press **⌘R**.
-
----
-
-Made by Mohamed Morad.
+| | | |
+|---|---|---|
+| ![PrimeShift screenshot 1](../Resources/Ch0-PrimeShift1.png) | ![PrimeShift screenshot 2](../Resources/Ch0-PrimeShift2.png) | ![PrimeShift screenshot 3](../Resources/Ch0-PrimeShift3.png) |
