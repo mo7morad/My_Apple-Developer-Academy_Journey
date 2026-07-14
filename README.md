@@ -12,6 +12,8 @@
 | 0 | [`AppleAcademy-Ch0-PrimeShift`](./AppleAcademy-Ch0-PrimeShift) | PrimeShift (2 Screen App) | `NavigationStack`, `List`, `HStack`, `Image`, assets |
 | 1 | [`AppleAcademy-Ch1-HelpAnAcademyFriend`](./AppleAcademy-Ch1-HelpAnAcademyFriend) | Individual Design (Sketch) | UI/UX design, Sketch artboards, design-to-dev handoff |
 | 2 | [`AppleAcademy-Ch2-Contacts`](./AppleAcademy-Ch2-Contacts) | Contacts | `Dictionary(grouping:)`, sectioned `List`, toolbar, search |
+| 3 | [`AppleAcademy-Ch3-Nutrition`](./AppleAcademy-Ch03-Nutrition/Ch03%20-%20Gym%20Nutrition) | Numo (Gym Nutrition Tracker) | Modular architecture, SwiftUI, health goals |
+| 4 | [`AppleAcademy-Ch4-iStack`](./AppleAcademy-Ch04-iStack/Distill) | Distill (iPadOS Painting App) | `CoreGraphics`, `PencilKit`, `AVFoundation`, iPadOS UI |
 
 ---
 
@@ -45,6 +47,22 @@ A (DUO) project **clone with a remix of Apple's Contacts app** built in two stag
 
 ---
 
+### [Challenge 3 — Numo (Gym Nutrition Tracker)](./AppleAcademy-Ch03-Nutrition/Ch03%20-%20Gym%20Nutrition)
+
+An iOS application designed to help gym-goers and fitness enthusiasts track their daily nutrition and maintain a healthy lifestyle. This project emphasizes a clean separation of concerns and robust UI development.
+
+**Key concepts:** Modular SwiftUI architecture (App, Core, DesignSystem, Features), health tracking, and custom design components.
+
+---
+
+### [Challenge 4 — Distill (iPadOS Painting & Multimedia)](./AppleAcademy-Ch04-iStack/Distill)
+
+A team iPadOS application built around multimedia and drawing capabilities. It combines CoreGraphics and PencilKit for a responsive canvas with AVFoundation to provide a rich media experience.
+
+**Key concepts:** iPadOS specific layouts, `PencilKit` drawing, `AVFoundation` media integration, and system constraints handling.
+
+---
+
 ## 🚀 Getting Started
 
 ```bash
@@ -55,7 +73,7 @@ git clone https://github.com/mo7morad/Apple-Developer-Academy-Challenges.git
 open AppleAcademy-Ch0-PrimeShift/PrimeShift.xcodeproj
 ```
 
-Then pick an iPhone simulator and press **⌘ R**.
+Then pick an iPhone simulator (or an iPad simulator for Challenge 4) and press **⌘ R**.
 
 ---
 
@@ -69,9 +87,17 @@ Apple-Developer-Academy-Challenges/
 ├── AppleAcademy-Ch1-HelpAnAcademyFriend/ # Challenge 1 (Design in Sketch)
 │   ├── README.md
 │   └── My individual Design.sketch
-└── AppleAcademy-Ch2-Contacts/            # Challenge 2
-    ├── README.md
-    └── Contacts/
+├── AppleAcademy-Ch2-Contacts/            # Challenge 2
+│   ├── README.md
+│   └── Contacts/
+├── AppleAcademy-Ch03-Nutrition/          # Challenge 3
+│   └── Ch03 - Gym Nutrition/
+│       ├── README.md
+│       └── Numo/
+└── AppleAcademy-Ch04-iStack/             # Challenge 4
+    └── Distill/
+        ├── README.md
+        └── Project/
 ```
 
 Each challenge folder contains its own `README.md` with a deeper breakdown of the code, concepts, and screenshots.

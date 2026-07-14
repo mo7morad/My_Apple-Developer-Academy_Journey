@@ -259,6 +259,8 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView()
-        .modelContainer(PersistenceController.shared.container)
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: UserProfile.self, LoggedMeal.self, configurations: config)
+    return DashboardView()
+        .modelContainer(container)
 }
