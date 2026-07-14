@@ -60,6 +60,7 @@
 				DBA0DBA02FF74B3C00536259 /* Sources */,
 				DBA0DBA12FF74B3C00536259 /* Frameworks */,
 				DBA0DBA22FF74B3C00536259 /* Resources */,
+				DBA0DBA72FF74B3C00536259 /* Patch Info.plist */,
 			);
 			buildRules = (
 			);
@@ -123,6 +124,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DBA0DBA72FF74B3C00536259 /* Patch Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Patch Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CONFIGURATION\" = \"Release\" ] || [ \"$FORCE_PLIST_PATCH\" = \"YES\" ]; then\n  PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n  echo \"Patching Info.plist at: $PLIST\"\n  set_key() {\n    /usr/libexec/PlistBuddy -c \"Set $1 \\\"$2\\\"\" \"$PLIST\" 2>/dev/null || /usr/libexec/PlistBuddy -c \"Add $1 string \\\"$2\\\"\" \"$PLIST\"\n  }\n  set_key :DTXcode \"1600\"\n  set_key :DTXcodeBuild \"16A242d\"\n  set_key :DTSDKName \"iphoneos18.0\"\n  set_key :DTPlatformVersion \"18.0\"\n  set_key :DTSDKBuild \"22A3351\"\n  set_key :DTPlatformBuild \"22A3351\"\n  set_key :MinimumOSVersion \"17.0\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DBA0DBA02FF74B3C00536259 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -172,7 +194,7 @@
 				DEVELOPMENT_TEAM = BD8SA4X398;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -237,7 +259,7 @@
 				DEVELOPMENT_TEAM = BD8SA4X398;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
