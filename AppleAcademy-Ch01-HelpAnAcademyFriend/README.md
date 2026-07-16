@@ -17,7 +17,7 @@
 
 ## Final Team HiFi
 
-[![Final Team HiFi](ReadmeAssets/ch01-team-hifi-preview.svg)](ReadmeAssets/Ch01-Team's_Final_HIFI.mp4)
+[![Final Team HiFi](ReadmeAssets/ch01-team-hifi-preview.svg)](ReadmeAssets/Ch01-Team-Final-HIFI.mp4)
 
 ## Learning Objectives
 
@@ -40,7 +40,7 @@ To view the deliverables:
 ```text
 AppleAcademy-Ch01-HelpAnAcademyFriend/
 ├── ReadmeAssets/
-│   ├── Ch01-Team's_Final_HIFI.mp4  # Final design screen recording
+│   ├── Ch01-Team-Final-HIFI.mp4  # Final design screen recording
 │   └── ch01-team-hifi-preview.svg # Video preview thumbnail
 └── My individual Design.sketch     # Sketch design file with artboards and UI components
 ```
