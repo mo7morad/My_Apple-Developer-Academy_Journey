@@ -10,6 +10,10 @@
 
 </div>
 
+<div align="center">
+  <img src="ReadmeAssets/Ch03-TheEnd.jpg" alt="Our amazing team at the end of the project 🥺" width="80%" />
+</div>
+
 ## Overview
 
 Numo is an iOS application designed to help gym-goers and fitness enthusiasts track their daily nutrition and maintain a healthy lifestyle. This project emphasizes a clean separation of concerns and robust UI development using a modular SwiftUI architecture.
@@ -18,8 +22,7 @@ Numo is an iOS application designed to help gym-goers and fitness enthusiasts tr
 > This app heavily relies on SwiftData for persistence, ensuring all your daily meals and profile data are stored securely on-device.
 
 <div align="center">
-  <img src="../Resources/Ch03-AppFlow.jpg" alt="Numo App Flow" width="45%" />
-  <img src="../Resources/Ch03-MealEntry.jpg" alt="Numo Meal Entry" width="45%" />
+  <img src="ReadmeAssets/Ch03-AppFlow.jpg" alt="Numo App Flow" width="80%" />
 </div>
 
 ## The Story Behind Numo
@@ -52,19 +55,18 @@ To run the project locally:
 ## Project Structure
 
 ```text
-AppleAcademy-Ch03-Nutrition/Ch03 - Gym Nutrition/
+AppleAcademy-Ch03-Nutrition/
 ├── README.md
+├── ReadmeAssets/              # Screenshots and project assets
+│   ├── Ch03-AppFlow.jpg
+│   ├── Ch03-MealEntry.jpg
+│   └── Ch03-TheEnd.jpg
+├── Config/
 ├── Numo.xcodeproj/
 └── Numo/
     ├── App/
     ├── Core/
     ├── DesignSystem/
     ├── Features/
-    └── Resources/
+    └── Resources/             # App configuration files (plist, template)
 ```
-
-## The Team
-
-<div align="center">
-  <img src="../Resources/Ch03-TheEnd.jpg" alt="Our amazing team at the end of the project 🥺" width="80%" />
-</div>

@@ -17,7 +17,7 @@
 
 ## Final Team HiFi
 
-https://github.com/user-attachments/assets/41e87a7c-ab40-4fce-a5ec-52dad7039f32
+[![Final Team HiFi](ReadmeAssets/ch01-team-hifi-preview.svg)](ReadmeAssets/Ch01-Team's_Final_HIFI.mp4)
 
 ## Learning Objectives
 
@@ -37,9 +37,12 @@ To view the deliverables:
 
 ## Project Structure
 
-```
-AppleAcademy-Ch1-HelpAnAcademyFriend/
-└── My individual Design.sketch   # Sketch design file with artboards and UI components
+```text
+AppleAcademy-Ch01-HelpAnAcademyFriend/
+├── ReadmeAssets/
+│   ├── Ch01-Team's_Final_HIFI.mp4  # Final design screen recording
+│   └── ch01-team-hifi-preview.svg # Video preview thumbnail
+└── My individual Design.sketch     # Sketch design file with artboards and UI components
 ```
 
 > [!NOTE]

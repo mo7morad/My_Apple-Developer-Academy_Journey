@@ -48,4 +48,4 @@ AppleAcademy-Ch0-PrimeShift/
 
 | | | |
 |---|---|---|
-| ![PrimeShift screenshot 1](../Resources/Ch0-PrimeShift1.png) | ![PrimeShift screenshot 2](../Resources/Ch0-PrimeShift2.png) | ![PrimeShift screenshot 3](../Resources/Ch0-PrimeShift3.png) |
+| ![PrimeShift screenshot 1](ReadmeAssets/Ch0-PrimeShift1.png) | ![PrimeShift screenshot 2](ReadmeAssets/Ch0-PrimeShift2.png) | ![PrimeShift screenshot 3](ReadmeAssets/Ch0-PrimeShift3.png) |

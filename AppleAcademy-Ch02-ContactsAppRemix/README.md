@@ -37,9 +37,15 @@ To run the project locally:
 
 ## Project Structure
 
-```
-AppleAcademy-Ch2-Contacts/
+```text
+AppleAcademy-Ch02-ContactsAppRemix/
 ├── Contacts.xcodeproj/
+├── ReadmeAssets/              # App screenshots
+│   ├── Ch02-ContactAppRemix-01.png
+│   ├── Ch02-ContactAppRemix-02.png
+│   ├── Ch02-ContactAppRemix-03.png
+│   ├── Ch02-ContactAppRemix-04.png
+│   └── Ch02-ContactAppRemix-05.png
 └── Contacts/
     ├── MainApp.swift              # Entry point → shows StaticContactsView
     ├── AcademyVersion.swift       # Static implementation
@@ -51,13 +57,13 @@ AppleAcademy-Ch2-Contacts/
 
 <table>
     <tr>
-        <td><img src="../Resources/Ch02-ContactAppRemix-01.png" alt="Contacts list" width="300"></td>
-        <td><img src="../Resources/Ch02-ContactAppRemix-02.png" alt="Search and selection" width="300"></td>
-        <td><img src="../Resources/Ch02-ContactAppRemix-03.png" alt="New habit modal" width="300"></td>
+        <td><img src="ReadmeAssets/Ch02-ContactAppRemix-01.png" alt="Contacts list" width="300"></td>
+        <td><img src="ReadmeAssets/Ch02-ContactAppRemix-02.png" alt="Search and selection" width="300"></td>
+        <td><img src="ReadmeAssets/Ch02-ContactAppRemix-03.png" alt="New habit modal" width="300"></td>
     </tr>
     <tr>
-        <td><img src="../Resources/Ch02-ContactAppRemix-04.png" alt="Boards view" width="300"></td>
-        <td><img src="../Resources/Ch02-ContactAppRemix-05.png" alt="Detail / dark theme preview" width="300"></td>
+        <td><img src="ReadmeAssets/Ch02-ContactAppRemix-04.png" alt="Boards view" width="300"></td>
+        <td><img src="ReadmeAssets/Ch02-ContactAppRemix-05.png" alt="Detail / dark theme preview" width="300"></td>
         <td></td>
     </tr>
 </table>
