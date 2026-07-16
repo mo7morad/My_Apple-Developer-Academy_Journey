@@ -7,21 +7,86 @@
 [![AVFoundation](https://img.shields.io/badge/AVFoundation-blue?style=flat-square)](https://developer.apple.com/documentation/avfoundation)
 [![PencilKit](https://img.shields.io/badge/PencilKit-orange?style=flat-square)](https://developer.apple.com/documentation/pencilkit)
 
-[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Technical Report](#technical-report-the-exploration-log)
+[The Story](#the-story-behind-distill) • [The Team](#meet-the-team) • [Design & Process](#design--documentation) • [Exploration Log](#the-exploration-log) • [Getting Started](#getting-started)
 
 </div>
 
-## Overview
+## The Story Behind Distill
 
-Distill is an iPadOS application built around multimedia and drawing capabilities using **CoreGraphics** and **PencilKit**, combined with **AVFoundation** for rich media experiences.
+For this challenge, we wanted to break out of our comfort zone. Instead of sticking strictly to standard iOS development, we found ourselves roaming and exploring other possibilities within the Apple ecosystem. We wanted to see what else we could build for, which led us straight to **iPadOS** and the fascinating world of multimedia. 
 
-This project was developed by a team to explore integrating multiple complex frameworks to deliver an optimized iPadOS application with Apple Pencil support.
+Distill was born out of this curiosity—an application built around rich media experiences and drawing capabilities using **CoreGraphics** and **PencilKit**, combined with **AVFoundation**.
+
+<div align="center">
+  <img src="ReadmeAssets/Chosen%20Moment.jpg" alt="A Chosen Moment" width="70%" />
+</div>
+
+## Meet the Team
+
+Our incredible team behind this exploration: **Rania, Na Vitha, Shafrial Azis, and Mohamed Morad (Moe)**.
+
+<div align="center">
+  <img src="ReadmeAssets/Our-Curly-Team.png" alt="Our Curly Team" width="45%" />
+  <img src="ReadmeAssets/TeamPic.jpg" alt="Team Picture" width="45%" />
+</div>
+<div align="center">
+  <img src="ReadmeAssets/GroupPicWithMentor.HEIC" alt="Group Picture With Mentor" width="60%" />
+</div>
+
+## Design & Documentation
+
+We documented everything meticulously. Before writing code, we spent a lot of time mapping out our ideas, flows, and architectures to ensure we fully grasped the frameworks we were about to tackle.
+
+<div align="center">
+  <img src="ReadmeAssets/OurDocumentationOnMiro.png" alt="Miro Board Documentation" width="80%" />
+</div>
+<br>
+<div align="center">
+  <img src="ReadmeAssets/DesignDoc.png" alt="Design Document" width="80%" />
+</div>
+
+## The Exploration Log
+
+This section serves as our technical reflection throughout the journey. It bridges the gap between what we originally thought we'd build and what we actually learned in the trenches.
+
+<div align="center">
+  <img src="ReadmeAssets/TeamReflection.png" alt="Team Reflection" width="80%" />
+</div>
+
+### Our Starting Assumptions
+Before we even opened Xcode, we assumed we'd be working heavily with pure media—videos, audio, and tinkering with playback. It sounded straightforward because we explicitly chose the multimedia framework. We thought it would just be about putting a video on a screen and pressing play.
+
+### What We Actually Built & Discovered
+We started by implementing `AVPlayer` to see how media playback works under the hood. 
+
+**The reality check:** We quickly discovered that playing media is far from simple! There are so many complex layers inside `AVFoundation`. It's not just a "play and pause" button; there's a whole universe of events happening in the background. 
+
+For instance, we learned that a video is essentially just frames shown fast enough to trick the brain. A single raw frame at 1920x1080 (3 bytes/pixel) is about 6MB. At 24fps, one minute of raw video would be around 8.6 GB! This blew our minds and made us truly appreciate why codecs and containers (like `.mp4` or `.mov`) are so essential for compressing video and handling tracks, timing, and metadata.
+
+### What We Tried and Dropped
+**The Idea:** We really wanted to implement image classification. The goal was to let users filter their photos by selecting specific people (e.g., "show me only photos with Ahmed and Sarah").
+
+**Why we dropped it:** We realized that while Apple's native Photos app can recognize faces and tag people, as a third-party app, we don't have access to that specific metadata due to privacy restrictions. We even considered building our own AI-based image recognition system to do the classification ourselves! But implementing a reliable face-recognition pipeline was way beyond the scope, timeline, and complexity of our project. So, we gracefully dropped it.
+
+### The Pivot & Final Decision
+Instead of fighting against privacy limitations, we redesigned the experience around capabilities that *are* available through Apple's public APIs. 
+
+**Our final stack:** CoreGraphics, Multimedia, and iPadOS.
+
+We pivoted to focus heavily on iPadOS and CoreGraphics for drawing, taking full advantage of the larger screen real estate and the Apple Pencil. The iPad environment allowed us to create a much more productive and immersive interface than a standard iPhone app would have.
+
+### Track Addendum: Do we really need these frameworks together?
+**Absolutely.** While the Multimedia framework handles the heavy lifting of accessing and working with media, **iPadOS** (along with CoreGraphics and PencilKit) is what makes the experience magical. The app could technically function using only the Multimedia framework, but it would lose its essence. The combination of both is what delivers the final, optimized product.
+
+*(Also, for privacy: Our app only requests gallery access so users can pick images to work with!)*
+
+---
 
 ## Features
 
 - **Interactive Canvas**: Draw and paint seamlessly using Apple Pencil on iPadOS.
 - **Multimedia Integration**: Incorporates videos and rich media for a holistic experience.
-- **Daily Constraints**: Built-in limits for daily painting sessions to encourage consistent habits (from the `feat/limit-painting-for-one-each-day` branch).
+- **Daily Constraints**: Built-in limits for daily painting sessions to encourage consistent habits (from our `limit-painting-for-one-each-day` branch).
 
 ## Getting started
 
@@ -33,55 +98,3 @@ To run the project locally:
 
 > [!IMPORTANT]
 > The app is heavily optimized for iPadOS. Running it on an iPhone simulator may cause unexpected layout issues.
-
----
-
-## Technical Report: The Exploration Log
-
-> [!NOTE]
-> **Before you start:** Fill in Section 1 early. Once you move on to Section 2, don't go back and edit Section 1. The gap between what you guessed and what you actually found is the point of this whole document.
-
-### Present your team
-Rania Na Vitha Shafrial Azis, Mohamed Morad (Moe)
-
-### Starting Assumption
-*What did you assume, before any real exploration (start of investigation phase)?*
-We thought we'll end up using: Things related to pure media, like videos and audios, and how to tinker around with them.
-Because: It sounded obvious since we chose the multimedia framework.
-
-### The Exploration Log
-*What we actually built or tested in code (not just read about):*
-We tried to implement the AVPlayer and see how the media plays and how the AVPlayer works.
-
-*What we discovered that we didn't expect:*
-There are so many layers from AVFoundation to play media like video. It is not just about a simple play and pause the video at front, but there are so many events happening in the back there. For instance, video is essentially frames shown fast enough to fool our brain. A single raw frame at 1920X1080 (3 bytes/pixel) has a 6MB size. At 24fps, one minute of raw video = ~8.6 GB! This is why codecs and containers (like .mp4 or .mov) are essential to compress video and hold tracks, timing, and metadata.
-
-### What We Tried and Dropped
-*We considered:*
-Having image classification. Based on what the user wants pictures with (e.g., a specific person), we view only the pics that include them and the selected people.
-
-*We dropped it because:*
-While the Photos app has this feature of image recognition and binding the image with people, as a 3rd party app, we don't have access to this meta-data. Also, having an LLM that does classification and recognition is very complex, so we dropped it twice ^__^
-
-### Real Limitations Hit
-*What broke, what didn't behave the way the documentation said it would:*
-We initially planned to let users filter photos by selecting specific people (for example, "show me only photos with Ahmed and Sarah"). However, during development we discovered that third-party iOS apps cannot access the Photos app's person-recognition metadata. We also explored using an AI/LLM-based image recognition system to identify people ourselves, but implementing a reliable face recognition pipeline was far beyond the scope and complexity of our project.
-
-*How we worked around it:*
-We removed the people-based filtering feature from our application and redesigned the experience around capabilities that are available through Apple's public APIs. This allowed us to focus on features that could be implemented reliably while keeping the app performant and maintainable.
-
-### The Revised Decision
-*Final decision:*
-CoreGraphics, MultiMedia, and iPadOS.
-
-*What changed since Section 1, and why:*
-We integrated with other frameworks to make our app suitable for the user. For example, we chose iPadOS and CoreGraphics for drawing because of the bigger screen and the Apple Pencil.
-
-### App Track Addendum
-#### About the Frameworks
-*Does your use case genuinely need both frameworks working together?*
-**Yes. Our use case genuinely needs both frameworks working together.** While the Multimedia framework provides the core functionality for accessing and working with media, the **iPadOS** framework and CoreGraphics for PencilKit enhances the experience by taking advantage of iPad-specific capabilities such as larger screen layouts, multitasking, and a more productive interface. The app could technically function using only the Multimedia framework, but it would not deliver the intended user experience on iPad. Therefore, both frameworks contribute to the final product, with Multimedia powering the core functionality and iPadOS improving usability and interaction.
-
-#### About Privacy
-*What data does your app actually need?*
-Gallery access, to allow the user to pick images from it.
