@@ -17,7 +17,7 @@
 
 ## Final Team HiFi
 
-[![Final Team HiFi](ReadmeAssets/ch01-team-hifi-preview.svg)](ReadmeAssets/Ch01-Team-Final-HIFI.mp4?raw=true)
+https://github.com/user-attachments/assets/41e87a7c-ab40-4fce-a5ec-52dad7039f32
 
 ## Learning Objectives
 
