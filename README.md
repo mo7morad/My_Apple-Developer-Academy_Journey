@@ -11,12 +11,22 @@
 
 </div>
 
-## Overview
+## 🌟 Overview & My Journey
 
-My journey through Apple Developer Academy challenges spanning both design and SwiftUI development. Most folders are self-contained Xcode projects that demonstrate incremental learning and skill acquisition over the course of the academy.
+<img align="right" src="./profile.jpg" alt="Mohamed Morad at Apple Developer Academy" width="280" style="border-radius: 10px; margin-left: 20px; margin-bottom: 10px;" />
+
+I am officially the **first Egyptian at the Apple Developer Academy in Bali!** 🇪🇬🍏
+
+When I started my journey leaving Egypt on the Indonesian UII scholarship, I couldn't have predicted this milestone. Out of 5,000+ applicants from all around the world, I'm thrilled to be one of the 220 accepted into this international cohort. 
+
+This repository documents my time embracing the Apple ecosystem—spanning both design and SwiftUI development. Most folders are self-contained Xcode projects that demonstrate incremental learning and skill acquisition. I'm excited to see where my curiosity and passion lead me to build in this new chapter on a global stage.
+
+**GO BIG, OR GO HOME!** ✨
 
 > [!NOTE]
 > Each challenge folder contains its own detailed `README.md` with a deeper breakdown of the code, concepts, and screenshots.
+
+<br clear="both"/>
 
 ## Challenges at a Glance
 
