@@ -13,7 +13,7 @@
 
 ## 🌟 Overview & My Journey
 
-<img align="right" src="./profile.jpg" alt="Mohamed Morad at Apple Developer Academy" width="280" style="border-radius: 10px; margin-left: 20px; margin-bottom: 10px;" />
+<img align="right" src="./profile.jpeg" alt="Mohamed Morad at Apple Developer Academy" width="280" style="border-radius: 10px; margin-left: 20px; margin-bottom: 10px;" />
 
 I am officially the **first Egyptian at the Apple Developer Academy in Bali!** 🇪🇬🍏
 

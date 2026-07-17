@@ -42,6 +42,10 @@ Exactly as simple as it needed to be. Mock data, and just 2 screens.
 |---|---|---|
 | ![PrimeShift screenshot 1](ReadmeAssets/Ch0-PrimeShift1.png) | ![PrimeShift screenshot 2](ReadmeAssets/Ch0-PrimeShift2.png) | ![PrimeShift screenshot 3](ReadmeAssets/Ch0-PrimeShift3.png) |
 
+## My Cluster
+
+![My Cluster - Individual Apps](ReadmeAssets/MyCluster_IndividualApps.jpg)
+
 ## Getting Started
 
 To explore this challenge locally:
