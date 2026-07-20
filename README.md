@@ -15,7 +15,7 @@
 
 <img align="right" src="./profile.jpeg" alt="Mohamed Morad at Apple Developer Academy" width="280" style="border-radius: 10px; margin-left: 20px; margin-bottom: 10px;" />
 
-I am officially the **first Egyptian at the Apple Developer Academy in Bali!** 🇪🇬🍏
+I am officially the **first Egyptian at the Apple Developer Academy in Bali!** 🇪🇬
 
 When I started my journey leaving Egypt on the Indonesian UII scholarship, I couldn't have predicted this milestone. Out of 5,000+ applicants from all around the world, I'm thrilled to be one of the 220 accepted into this international cohort. 
 
